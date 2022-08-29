@@ -28,5 +28,7 @@ public class Funcionario extends Usuario{
         estante.adicionarLivro(livro);
     }
     public void fazerPedido(){}
+    
+    public void cadastrarUsuario(){}
 }
 
