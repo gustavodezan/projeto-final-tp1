@@ -1,12 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+package biblioteca;
 
-/**
- *
- * @author jp
- */
 public class GerenciarBiblioteca {
     public static void main(String[] args){
         Livro livro = new Livro("matrix","22/01/25","ficcao",158);
@@ -23,6 +16,9 @@ public class GerenciarBiblioteca {
         //estante.removerLivro("o jogo");
         //estante.toString();
         //System.out.println(livro.mostrarInformacoes());
+
+        Usuario usuario = new Usuario();
+        System.out.println(usuario.VerificarLivro(0));
     }
     
 }
