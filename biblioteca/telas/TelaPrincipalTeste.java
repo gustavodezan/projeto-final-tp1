@@ -1,6 +1,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Estante;
+import biblioteca.classes.Funcionario;
 import java.util.ArrayList;
 
 /**
@@ -9,12 +10,14 @@ import java.util.ArrayList;
  */
 public class TelaPrincipalTeste extends javax.swing.JFrame {
     ArrayList<Estante> estantes;
+    Funcionario funcionarioA;
     
     /*Inicia os componentes da tela e cria a lista de estantes */
     
     public TelaPrincipalTeste() {
         initComponents();
         estantes = new ArrayList<>();
+        funcionarioA=new Funcionario("teste","teste",1,"teste","teste");
         
     }
 
@@ -66,7 +69,7 @@ public class TelaPrincipalTeste extends javax.swing.JFrame {
 
     /*Abre a tela de opcções do funcionario ao aperta o botão */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        new TelaOpcoesFuncionario(estantes).setVisible(true);
+        new TelaOpcoesFuncionario(estantes,funcionarioA).setVisible(true);
     }                                        
 
     
@@ -107,3 +110,4 @@ public class TelaPrincipalTeste extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration                   
 }
+
