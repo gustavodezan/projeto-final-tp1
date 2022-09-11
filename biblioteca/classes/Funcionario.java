@@ -4,7 +4,7 @@ package biblioteca.classes;
 public class Funcionario extends Usuario{
     private String cargo,setorResponsavel;
 
-    Funcionario(String nome, String senha, int id,String cargo, String setorResponsavel) {
+    public Funcionario(String nome, String senha, int id,String cargo, String setorResponsavel) {
         super(nome,senha,id);
         this.cargo = cargo;
         this.setorResponsavel = setorResponsavel;
