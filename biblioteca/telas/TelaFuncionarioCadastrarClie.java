@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package biblioteca.telas;
 import biblioteca.classes.Cliente;
+import biblioteca.classes.Livro;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
@@ -12,12 +15,16 @@ import javax.swing.JOptionPane;
  * @author jplim
  */
 public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
+ArrayList<Cliente> clientes;
 
-    /**
-     * Creates new form TelaFuncionarioCadastrarClie
-     */
-    public TelaFuncionarioCadastrarClie() {
+    public TelaFuncionarioCadastrarClie(){
         initComponents();
+    }
+    
+    //cria a tela e seus componentes
+    public TelaFuncionarioCadastrarClie(ArrayList<Cliente> clientes) {
+        initComponents();
+        this.clientes=clientes;
     }
 
     /**
@@ -40,7 +47,6 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
         jBtCanc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Cliente");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         jLbNome.setText("Nome:");
@@ -112,19 +118,30 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 405, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>                        
     
-    
-    // Fecha a janela
-    
-    private void jBtCancActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        this.dispose();
-    }                                       
-
     // Cria o objeto do cliente
     
     private void jBtConfActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -143,7 +160,9 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
         }
         
         if (!nome.equals("") && !dataIns.equals("") && !senha.equals("") && id > 0){
-            Cliente cliente = new Cliente(nome,senha,id,"",dataIns,"1");
+            ArrayList<Livro> historicoLivros = new ArrayList<>();
+            Cliente cliente = new Cliente(nome,senha,id,historicoLivros,dataIns,1);
+            clientes.add(cliente);
             JOptionPane.showMessageDialog (null,"Cliente cadastrado com sucesso.");
             jTfNome.setText("");
             jTfSenha.setText("");
@@ -155,6 +174,13 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
             jTfSenha.setText("");
             jTfId.setText("");
         }
+                               
+    }                                       
+    
+    // Fecha a janela
+    
+    private void jBtCancActionPerformed(java.awt.event.ActionEvent evt) {                                        
+       this.dispose();
     }                                       
 
     /**
@@ -182,6 +208,7 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaFuncionarioCadastrarClie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
