@@ -20,6 +20,7 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
     Cliente cliente;
     ArrayList<Livro> livros;
     ArrayList<Livro> livrosped;
+    ArrayList<Integer> inds = new ArrayList<>();
     FuncFazerPedido ped;
     
     public FuncEscolherLivPed() {
@@ -33,20 +34,20 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
         this.livros=estante.getEstante();
         this.livrosped=livrosped;
         this.ped=ped;
-        this.carregarTabela1();
+        this.carregarTabela();
     }
     
-     public void carregarTabela1(){
+     public void carregarTabela(){
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Data de Publicação","Genero","Quantidade de Paginas"},0){
             @Override
             public boolean isCellEditable(int row, int column){return false;}};
-        
+        inds.clear();
         for (int i=0;i < livros.size();i++){
             if (!livros.get(i).isEmprestado()){
                 Object linha[] = {livros.get(i).getNome(),livros.get(i).getDataDePublicacao(),livros.get(i).getGenero(),livros.get(i).getQtDePaginas()};
                 modelo.addRow(linha);
-            }
-            
+                inds.add(livros.indexOf(livros.get(i)));
+            }   
         }
         tblAdcPed.setModel(modelo);
      }
@@ -143,16 +144,18 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
     private void btnAdcPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcPActionPerformed
         int ind = tblAdcPed.getSelectedRow();
         if (ind >=0 && ind < livros.size()){
-            livrosped.add(livros.get(ind));
+            livrosped.add(livros.get(inds.get(ind)));
             ped.carregarTabela2();
+            this.carregarTabela();
         }
     }//GEN-LAST:event_btnAdcPActionPerformed
 
     private void btnRemPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemPActionPerformed
         int ind = tblAdcPed.getSelectedRow();
         if (ind >=0 && ind < livros.size()){
-            livrosped.remove(livros.get(ind));
+            livrosped.remove(livros.get(inds.get(ind)));
             ped.carregarTabela2();
+            this.carregarTabela();
         }
     }//GEN-LAST:event_btnRemPActionPerformed
 
