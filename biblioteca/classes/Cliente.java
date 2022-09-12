@@ -12,13 +12,16 @@ public class Cliente extends Usuario {
     private ArrayList<Livro> historicoLivros;
     private ArrayList<Livro> livrosEmprestados;
     
-    public Cliente(){}
+    public Cliente(){
+        this.livrosEmprestados = new ArrayList<>();
+    }
     public Cliente(String nome,String senha,int id,
     ArrayList historicoLivros,String dataInscricao,int nivelLeitor){
         super(nome,senha,id);
         this.historicoLivros = historicoLivros;
         this.dataInscricao = dataInscricao;
         this.nivelLeitor = nivelLeitor;
+        this.livrosEmprestados = new ArrayList<>();
     }
     public ArrayList getHistoricoLivros(){
         return this.historicoLivros;
