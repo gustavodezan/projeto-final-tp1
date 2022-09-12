@@ -6,8 +6,9 @@ package biblioteca.classes;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 public class Cliente extends Usuario {
-    private String dataInscricao;
+    private GregorianCalendar dataInscricao;
     private int nivelLeitor;
     private ArrayList<Livro> historicoLivros;
     private ArrayList<Livro> livrosEmprestados;
@@ -16,11 +17,18 @@ public class Cliente extends Usuario {
         this.livrosEmprestados = new ArrayList<>();
     }
     public Cliente(String nome,String senha,String username,
-    ArrayList historicoLivros,String dataInscricao,int nivelLeitor){
-        super(nome,senha,username);
+    ArrayList historicoLivros,GregorianCalendar dataInscricao,int nivelLeitor){
+        super(nome,username,senha);
         this.historicoLivros = historicoLivros;
         this.dataInscricao = dataInscricao;
         this.nivelLeitor = nivelLeitor;
+        this.livrosEmprestados = new ArrayList<>();
+    }
+    public Cliente(String nome, String senha, String username) {
+        super(nome,username,senha);
+        this.historicoLivros = new ArrayList<Livro>();
+        this.dataInscricao = new GregorianCalendar();
+        this.nivelLeitor = 0;
         this.livrosEmprestados = new ArrayList<>();
     }
     public ArrayList getHistoricoLivros(){
@@ -29,10 +37,10 @@ public class Cliente extends Usuario {
     public void setHistoricoLivros(ArrayList historicoLivros){
         this.historicoLivros = historicoLivros;
     }
-    public String getDataIncricao(){
+    public GregorianCalendar getDataIncricao(){
         return this.dataInscricao;
     }
-    public void setDataInscricao(String dataInscricao){
+    public void setDataInscricao(GregorianCalendar dataInscricao){
         this.dataInscricao = dataInscricao;
     }
     public int getNivelLeitor(){

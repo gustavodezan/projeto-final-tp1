@@ -1,5 +1,4 @@
 package biblioteca.classes;
-
 public class Usuario {
     private String nome, nomeUsuario, senha;
     private int id;

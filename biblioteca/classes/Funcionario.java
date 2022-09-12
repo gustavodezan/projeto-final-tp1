@@ -5,7 +5,7 @@ public class Funcionario extends Usuario{
     private String cargo,setorResponsavel;
 
     public Funcionario(String nome, String senha, String username,String cargo, String setorResponsavel) {
-        super(nome,senha,username);
+        super(nome,username,senha);
         this.cargo = cargo;
         this.setorResponsavel = setorResponsavel;
     }
@@ -29,5 +29,4 @@ public class Funcionario extends Usuario{
         Livro livro= new Livro(nome,dataDePublicacao,genero,qtDePaginas);
         estante.adicionarLivro(livro);
     }
-    public void fazerPedido(){}
 }
