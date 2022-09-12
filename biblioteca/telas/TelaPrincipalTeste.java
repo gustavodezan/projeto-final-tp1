@@ -1,5 +1,6 @@
 package biblioteca.telas;
 
+import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
 import biblioteca.classes.Funcionario;
 import java.util.ArrayList;
@@ -8,16 +9,21 @@ import java.util.ArrayList;
  *
  * @author jplim
  */
-public class TelaPrincipalTeste extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame {
+
     ArrayList<Estante> estantes;
-    Funcionario funcionarioA;
+    ArrayList<Cliente> clientes;
+    ArrayList<Funcionario> funcionarios ;
     
     /*Inicia os componentes da tela e cria a lista de estantes */
     
-    public TelaPrincipalTeste() {
+    public TelaPrincipal() {
         initComponents();
         estantes = new ArrayList<>();
-        funcionarioA=new Funcionario("teste","teste",1,"teste","teste");
+        clientes = new ArrayList<>();
+        funcionarios =new ArrayList<>();
+        Funcionario funcionarioA=new Funcionario("João Gustavo","12345","admin","administrador do Sistema","TI");
+        funcionarios.add(funcionarioA);
         
     }
 
@@ -31,48 +37,78 @@ public class TelaPrincipalTeste extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnCads = new javax.swing.JButton();
+        btnLog = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Funcionarios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCads.setText("Cadastro do usuario");
+        btnCads.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCadsActionPerformed(evt);
             }
         });
+
+        btnLog.setText("Login");
+        btnLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jButton1)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(225, 225, 225)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(btnLog)
+                        .addGap(37, 37, 37)
+                        .addComponent(btnCads))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel1)))
+                .addGap(0, 77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jButton1)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLog)
+                    .addComponent(btnCads))
+                .addGap(79, 79, 79))
         );
 
         pack();
     }// </editor-fold>                        
 
-    /*Abre a tela de opcções do funcionario ao aperta o botão */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        new TelaOpcoesFuncionario(estantes,funcionarioA).setVisible(true);
-    }                                        
+    private void btnCadsActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        new CadastroView(clientes).setVisible(true);
+    }                                       
 
-    
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        new LoginView(clientes,funcionarios,estantes).setVisible(true);
+    }                                      
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -87,26 +123,31 @@ public class TelaPrincipalTeste extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipalTeste().setVisible(true);
+                new TelaPrincipal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCads;
+    private javax.swing.JButton btnLog;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration                   
 }
