@@ -1,5 +1,6 @@
 package biblioteca.telas;
 
+import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
 import biblioteca.classes.Funcionario;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class TelaPrincipalTeste extends javax.swing.JFrame {
     public TelaPrincipalTeste() {
         initComponents();
         estantes = new ArrayList<>();
-        funcionarioA=new Funcionario("teste","teste",1,"teste","teste");
+        funcionarioA=new Funcionario("teste","teste","teste","teste","teste");
         
     }
 
@@ -96,7 +97,7 @@ public class TelaPrincipalTeste extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaPrincipalTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -1,20 +1,22 @@
 package biblioteca.classes;
 
-
-
-
-   
-
 public class Usuario {
-    private String nome, senha;
+    private String nome, nomeUsuario, senha;
     private int id;
 
     public Usuario() {}
 
-    public Usuario(String nome, String senha, int id) {
+    public Usuario(String nome, String nomeUsuario, String senha, int id) {
         this.nome = nome;
+        this.nomeUsuario = nomeUsuario;
         this.senha = senha;
         this.id = id;
+    }
+    
+    public Usuario(String nome, String nomeUsuario, String senha) {
+        this.nome = nome;
+        this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
     }
 
     public enum Genero {
@@ -56,6 +58,14 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+       
 }
     
 

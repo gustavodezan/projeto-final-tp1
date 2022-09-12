@@ -151,17 +151,17 @@ ArrayList<Cliente> clientes;
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
         fmt.setCalendar(cal);
         String dataIns =fmt.format(cal.getTime());
-        int id;
-
-        try{
-           id = Integer.parseInt(jTfId.getText());
-        }catch (NumberFormatException e){
-            id=-1;
-        }
-        
-        if (!nome.equals("") && !dataIns.equals("") && !senha.equals("") && id > 0){
+//        int id;
+//
+//        try{
+//           id = Integer.parseInt(jTfId.getText());
+//        }catch (NumberFormatException e){
+//            id=-1;
+//        }
+        String username = jTfId.getText();
+        if (!nome.equals("") && !dataIns.equals("") && !senha.equals("") && username != ""){
             ArrayList<Livro> historicoLivros = new ArrayList<>();
-            Cliente cliente = new Cliente(nome,senha,id,historicoLivros,dataIns,1);
+            Cliente cliente = new Cliente(nome,senha,username,historicoLivros,dataIns,1);
             clientes.add(cliente);
             JOptionPane.showMessageDialog (null,"Cliente cadastrado com sucesso.");
             jTfNome.setText("");
