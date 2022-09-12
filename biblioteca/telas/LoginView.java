@@ -1,5 +1,8 @@
 package biblioteca.telas;
 
+import biblioteca.classes.Cliente;
+import biblioteca.classes.Estante;
+import biblioteca.classes.Funcionario;
 import biblioteca.db.Conexao;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -8,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import biblioteca.classes.Usuario;
 import biblioteca.db.UsuariosDB;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /*
@@ -20,12 +24,19 @@ import javax.swing.JOptionPane;
  * @author 07339943188
  */
 public class LoginView extends javax.swing.JFrame {
-
-    /**
-     * Creates new form loginView
-     */
+    ArrayList<Estante> estantes;
+    ArrayList<Cliente> clientes;
+    ArrayList<Funcionario> funcionarios ;
+       
     public LoginView() {
         initComponents();
+    }
+     public LoginView(ArrayList<Cliente> clientes, ArrayList<Funcionario> funcionarios,ArrayList<Estante> estantes) {
+        initComponents();
+        this.clientes=clientes;
+        //System.out.println(this.clientes.get(0).getNomeUsuario());
+        this.funcionarios=funcionarios;
+        this.estantes=estantes;
     }
 
     /**
@@ -42,11 +53,10 @@ public class LoginView extends javax.swing.JFrame {
         jTextFieldUsuario = new javax.swing.JTextField();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Usuario");
 
@@ -72,13 +82,6 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/unb.png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -91,7 +94,6 @@ public class LoginView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(97, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -122,9 +124,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -133,45 +133,47 @@ public class LoginView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String usuario = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
-        Usuario user = new Usuario(usuario,senha);
+        boolean existe = false;
         
-        //fazer a verificação para ver se o usuario existe no banco
-        try {
-            Connection conexao = new Conexao().getConnection();
-            UsuariosDB userdb = new UsuariosDB(conexao);
-            
-            //vai fazer a consulta e retornar o resultado se tal usuario existir
-            ResultSet queryUserdb = userdb.autenticacaoUser(user);
-            
-            if(queryUserdb.next()){
-                //se nome e senha forem admin vai entrar na tela funcionarios
-                if(!queryUserdb.getString("tipo_usuario").equals("funcionario")){
-                    TelaOpcoesCliente tela = new TelaOpcoesCliente();
-                    tela.setVisible(true);
-                }else{
-                    TelaOpcoesFuncionario tela = new TelaOpcoesFuncionario();
-                    tela.setVisible(true);
+        for (int i=0;i < funcionarios.size();i++){
+            if (funcionarios.get(i).getNomeUsuario().equals(usuario)){
+                existe=true;
+                if (funcionarios.get(i).verificarLogin(senha)){
+                    new TelaOpcoesFuncionario(estantes,funcionarios.get(i)).setVisible(true);
+                    this.dispose();
+                    break;
                 }
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Usuario ou senha incorreta");
+                else{
+                    JOptionPane.showMessageDialog(null,"Senha incorreta.");
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //se o user=admin, id=1 e a senha for 123456 ir para tela de funcionario
+        if (existe==false){
+            for (int i=0;i < clientes.size();i++){
+                if (clientes.get(i).getNomeUsuario().equals(usuario)){
+                    existe=true;
+                    if (clientes.get(i).verificarLogin(senha)){
+                        new TelaOpcoesCliente().setVisible(true);
+                        break;
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Senha incorreta.");
+                    }
+                }
+            }
+            if (existe==false){
+                JOptionPane.showMessageDialog(null,"Usuario não existe.");
+            }
+        }
+        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaActionPerformed
      
     }//GEN-LAST:event_jPasswordFieldSenhaActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        CadastroView telaCadastro = new CadastroView();
-        telaCadastro.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
@@ -215,7 +217,6 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

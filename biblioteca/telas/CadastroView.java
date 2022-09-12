@@ -4,25 +4,28 @@
  */
 package biblioteca.telas;
 
+import biblioteca.classes.Cliente;
+import biblioteca.classes.Livro;
 import biblioteca.classes.Usuario;
-import biblioteca.db.Conexao;
-import biblioteca.db.UsuariosDB;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author 07339943188
  */
 public class CadastroView extends javax.swing.JFrame {
-
-    /**
-     * Creates new form cadastroView
-     */
+    ArrayList<Cliente> clientes;
+            
     public CadastroView() {
         initComponents();
+    }
+    public CadastroView(ArrayList<Cliente> clientes) {
+        initComponents();
+        this.clientes=clientes;
     }
 
     /**
@@ -34,7 +37,7 @@ public class CadastroView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextFieldId = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -44,17 +47,17 @@ public class CadastroView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIdActionPerformed(evt);
+                jTextFieldNomeActionPerformed(evt);
             }
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/unb.png"))); // NOI18N
 
-        jLabel2.setText("id");
+        jLabel2.setText("Nome");
 
         jLabel3.setText("Usuario");
 
@@ -94,7 +97,7 @@ public class CadastroView extends javax.swing.JFrame {
                                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                                 .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.Alignment.LEADING))))
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(jLabel5)))
@@ -113,7 +116,7 @@ public class CadastroView extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(5, 5, 5)
@@ -130,27 +133,40 @@ public class CadastroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdActionPerformed
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIdActionPerformed
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nome = jTextFieldNome.getText();
         String usuario = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
-        Usuario user = new Usuario(usuario,senha);
+        GregorianCalendar cal = new GregorianCalendar();
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+        fmt.setCalendar(cal);
+        String dataIns =fmt.format(cal.getTime());
         
-        try {
-            Connection conexao = new Conexao().getConnection();
-            UsuariosDB userdb = new UsuariosDB(conexao);
-            userdb.insertUsuario(user);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroView.class.getName()).log(Level.SEVERE, null, ex);
+        if (!nome.equals("") && !dataIns.equals("") && !senha.equals("") && !usuario.equals("")){
+            ArrayList<Livro> historicoLivros = new ArrayList<>();
+            Cliente cliente = new Cliente(nome,senha,usuario,historicoLivros,dataIns,1);
+            clientes.add(cliente);
+            JOptionPane.showMessageDialog (null,"Cadastro realizado com sucesso.");
+            this.dispose();
         }
+        else{
+            JOptionPane.showMessageDialog (null,"valor(es) invalido(s)");
+            jTextFieldNome.setText("");
+            jTextFieldUsuario.setText("");
+            jPasswordFieldSenha.setText("");
+        }
+        
+        
+        
+        
         
         
                 
@@ -200,7 +216,7 @@ public class CadastroView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordFieldSenha;
-    private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }
