@@ -15,9 +15,9 @@ public class Cliente extends Usuario {
     public Cliente(){
         this.livrosEmprestados = new ArrayList<>();
     }
-    public Cliente(String nome,String senha,int id,
+    public Cliente(String nome,String senha,String username,
     ArrayList historicoLivros,String dataInscricao,int nivelLeitor){
-        super(nome,senha,id);
+        super(nome,username,senha);
         this.historicoLivros = historicoLivros;
         this.dataInscricao = dataInscricao;
         this.nivelLeitor = nivelLeitor;
