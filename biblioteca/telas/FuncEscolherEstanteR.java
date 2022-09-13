@@ -5,6 +5,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Estante;
+import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -25,9 +26,9 @@ public class FuncEscolherEstanteR extends javax.swing.JFrame {
     e carrega a tabela de estantes para o usuario poder selecionar alguma para remover
     um livro*/
     
-    public FuncEscolherEstanteR(ArrayList<Estante> estantes) {
+    public FuncEscolherEstanteR(GerenciarBiblioteca sistema) {
         initComponents();
-        this.estantes=estantes;
+        this.estantes=sistema.getEstantes();
         carregarTabela();
     }
     

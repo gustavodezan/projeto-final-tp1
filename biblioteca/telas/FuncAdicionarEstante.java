@@ -5,6 +5,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Estante;
+import biblioteca.classes.GerenciarBiblioteca;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -22,9 +23,9 @@ public class FuncAdicionarEstante extends javax.swing.JFrame {
     /*Inicia os componentes da tela e conecta a variavel da tela com a referencia da lista de estantes 
     dada ao iniciar a tela */
     
-    public FuncAdicionarEstante(ArrayList<Estante> estantes) {
+    public FuncAdicionarEstante(GerenciarBiblioteca sistema) {
         initComponents();
-        this.estantes=estantes;
+        this.estantes=sistema.getEstantes();
     }
 
     /**

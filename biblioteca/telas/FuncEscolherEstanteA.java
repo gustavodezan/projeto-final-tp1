@@ -6,6 +6,7 @@ package biblioteca.telas;
 
 import biblioteca.classes.Estante;
 import biblioteca.classes.Funcionario;
+import biblioteca.classes.GerenciarBiblioteca;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author jplim
  */
 public class FuncEscolherEstanteA extends javax.swing.JFrame {
-ArrayList<Estante> estantes = new ArrayList<>();
+    ArrayList<Estante> estantes = new ArrayList<>();
     Funcionario funcionarioA;
     public FuncEscolherEstanteA(){
         initComponents();
@@ -25,9 +26,9 @@ ArrayList<Estante> estantes = new ArrayList<>();
     e carrega a tabela de estantes para o usuario poder selecionar alguma para adicionar
     um livro*/
     
-    public FuncEscolherEstanteA(ArrayList<Estante> estantes,Funcionario funcionario){
+    public FuncEscolherEstanteA(GerenciarBiblioteca sistema,Funcionario funcionario){
         initComponents();
-        this.estantes=estantes;
+        this.estantes=sistema.getEstantes();
         this.funcionarioA=funcionario;
         carregarTabela();
     }

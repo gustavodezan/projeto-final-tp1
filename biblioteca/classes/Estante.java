@@ -78,6 +78,11 @@ public class Estante {
             this.estante.add(livro);
             this.qtLivrosEstante=estante.size();
         }
+        else{
+            //jpanel para mostrar que ja existe tal livro na estante
+            System.out.println("já existe esse exemplar");
+        }
+        
     }
     public void removerLivro(Livro livro){
         //verificaçao se existe ou nao o livro no array

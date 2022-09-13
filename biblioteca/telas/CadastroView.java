@@ -5,6 +5,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Cliente;
+import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -21,9 +22,9 @@ public class CadastroView extends javax.swing.JFrame {
     public CadastroView() {
         initComponents();
     }
-    public CadastroView(ArrayList<Cliente> clientes) {
+    public CadastroView(GerenciarBiblioteca sistema) {
         initComponents();
-        this.clientes=clientes;
+        this.clientes=sistema.getClientes();
     }
 
     /**
@@ -47,23 +48,11 @@ public class CadastroView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
-            }
-        });
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/unb.png"))); // NOI18N
 
         jLabel2.setText("Nome");
 
         jLabel3.setText("Usuario");
-
-        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUsuarioActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Senha");
 
@@ -76,8 +65,6 @@ public class CadastroView extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Cadastro");
-
-        jPasswordFieldSenha.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,19 +112,11 @@ public class CadastroView extends javax.swing.JFrame {
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeActionPerformed
-
-    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nome = jTextFieldNome.getText();

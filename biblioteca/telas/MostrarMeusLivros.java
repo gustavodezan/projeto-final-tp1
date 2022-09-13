@@ -58,6 +58,7 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
         jButtonDevolverLivro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,7 +111,7 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
                livroSelecionado.setEmprestado(false);
            }else{
                //messagem caso eu nao tenha pego o livro emprestado
-               //JOptionPane.showMessageDialog(rootPane, evt);
+                JOptionPane.showMessageDialog(null,"Você não possui esse livro");
            }
         }
     }//GEN-LAST:event_jButtonDevolverLivroActionPerformed

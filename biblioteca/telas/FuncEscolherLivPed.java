@@ -4,12 +4,9 @@
  */
 package biblioteca.telas;
 
-import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
 import biblioteca.classes.Livro;
-import biblioteca.classes.Pedido;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
  * @author jplim
  */
 public class FuncEscolherLivPed extends javax.swing.JFrame {
-    Cliente cliente;
     ArrayList<Livro> livros;
     ArrayList<Livro> livrosped;
     ArrayList<Integer> inds = new ArrayList<>();
@@ -27,10 +23,9 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
         initComponents();
     }
     
-    public FuncEscolherLivPed(Cliente cliente,Estante estante,ArrayList<Livro> livrosped,FuncFazerPedido ped) {
+    public FuncEscolherLivPed(Estante estante,ArrayList<Livro> livrosped,FuncFazerPedido ped) {
         initComponents();
         lbEst.setText(estante.getIdentificacao());
-        this.cliente=cliente;
         this.livros=estante.getEstante();
         this.livrosped=livrosped;
         this.ped=ped;

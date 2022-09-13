@@ -51,5 +51,11 @@ public class GerenciarBiblioteca {
         this.pedidos = pedidos;
     }
     
+    public void addPedido(Pedido pedido){
+        pedidos.add(pedido);
+    }
     
+    public void addFuncionario(Funcionario funcionario){
+        funcionarios.add(funcionario);
+    }
 }

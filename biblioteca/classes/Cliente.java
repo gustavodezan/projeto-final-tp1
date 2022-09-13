@@ -15,7 +15,6 @@ public class Cliente extends Usuario {
     
     public Cliente(){
         this.livrosEmprestados = new ArrayList<>();
-        this.historicoLivros = new ArrayList<>();
     }
     public Cliente(String nome,String senha,String username,
     ArrayList historicoLivros,GregorianCalendar dataInscricao,int nivelLeitor){

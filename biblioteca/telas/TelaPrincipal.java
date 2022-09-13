@@ -112,11 +112,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadsActionPerformed
-        new CadastroView(clientes).setVisible(true);
+        new CadastroView(sistema).setVisible(true);
     }//GEN-LAST:event_btnCadsActionPerformed
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-        new LoginView(clientes,funcionarios,estantes,sistema).setVisible(true);
+        new LoginView(sistema).setVisible(true);
     }//GEN-LAST:event_btnLogActionPerformed
 
     /**

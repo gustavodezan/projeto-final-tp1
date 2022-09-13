@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package biblioteca.telas;
 import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
@@ -23,21 +19,23 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     public TelaOpcoesCliente() {
         initComponents();
         carregarTabela();
+        this.setExtendedState(MAXIMIZED_BOTH); 
     }
     public TelaOpcoesCliente(Cliente myUser,ArrayList<Estante> estantes){
         initComponents();
         this.myUser = myUser;
         this.estantes = estantes;
         carregarTabela();
+        this.setExtendedState(MAXIMIZED_BOTH); 
     }
     
     public void carregarTabela(){
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"ID","Nome","Data de Inscrição","Nivel de Leitor"},0){
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"ID","Nome","Data de Inscrição","Nivel de Leitor","Livros Emprestados"},0){
             @Override
             public boolean isCellEditable(int row, int column){return false;}
         };
             
-        Object linha[] = {myUser.getId(),myUser.getNome(),myUser.getDataIncricao().getTime(),myUser.getNivelLeitor()};
+        Object linha[] = {myUser.getId(),myUser.getNome(),myUser.getDataIncricao().getTime(),myUser.getNivelLeitor(),myUser.getLivrosEmprestados().size()};
         modelo.addRow(linha);
         
         jTable1.setModel(modelo);
@@ -52,34 +50,50 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jMenuBar2 = new javax.swing.JMenuBar();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemMeusLivros = new javax.swing.JMenuItem();
         jMenuItemAcervo = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png"))); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "null"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jMenu1.setText("Cliente");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png"))); // NOI18N
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/employee.png"))); // NOI18N
+        jMenu1.setText("Cliente");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItemMeusLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
         jMenuItemMeusLivros.setText("Meus Livros");
         jMenuItemMeusLivros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +102,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemMeusLivros);
 
+        jMenuItemAcervo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/bookshelf16x16.png"))); // NOI18N
         jMenuItemAcervo.setText("Acervo");
         jMenuItemAcervo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,41 +111,43 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemAcervo);
 
-        jMenuBar2.add(jMenu1);
+        jMenuBar1.add(jMenu1);
 
-        setJMenuBar(jMenuBar2);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(368, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170)
-                .addComponent(jLabel1)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, Short.MAX_VALUE)
+                .addGap(111, 111, 111))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemMeusLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMeusLivrosActionPerformed
-        new MostrarMeusLivros(myUser.getHistoricoLivros()).setVisible(true);
-    }//GEN-LAST:event_jMenuItemMeusLivrosActionPerformed
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        //new MostrarMeusLivros(myUser.getHistoricoLivros()).setVisible(true);
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItemAcervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcervoActionPerformed
         new MostrarAcervo(estantes).setVisible(true);
     }//GEN-LAST:event_jMenuItemAcervoActionPerformed
+
+    private void jMenuItemMeusLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMeusLivrosActionPerformed
+        new MostrarMeusLivros(myUser.getHistoricoLivros()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemMeusLivrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,10 +187,9 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAcervo;
     private javax.swing.JMenuItem jMenuItemMeusLivros;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

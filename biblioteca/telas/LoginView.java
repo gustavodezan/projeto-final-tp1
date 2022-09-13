@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
  * @author 07339943188
  */
 public class LoginView extends javax.swing.JFrame {
-    ArrayList<Estante> estantes;
     ArrayList<Cliente> clientes;
     ArrayList<Funcionario> funcionarios ;
     GerenciarBiblioteca sistema;
@@ -25,12 +24,10 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
     }
-     public LoginView(ArrayList<Cliente> clientes, ArrayList<Funcionario> funcionarios,ArrayList<Estante> estantes, GerenciarBiblioteca sistema) {
+     public LoginView(GerenciarBiblioteca sistema) {
         initComponents();
-        this.clientes=clientes;
-        //System.out.println(this.clientes.get(0).getNomeUsuario());
-        this.funcionarios=funcionarios;
-        this.estantes=estantes;
+        this.clientes=sistema.getClientes();
+        this.funcionarios=sistema.getFuncionarios();
         this.sistema = sistema;
     }
 
@@ -133,8 +130,8 @@ public class LoginView extends javax.swing.JFrame {
             if (funcionarios.get(i).getNomeUsuario().equals(usuario)){
                 existe=true;
                 if (funcionarios.get(i).verificarLogin(senha)){
-                    new TelaOpcoesFuncionario(estantes,funcionarios.get(i),clientes).setVisible(true);
-                    this.dispose();
+                    new TelaOpcoesFuncionario(sistema,funcionarios.get(i)).setVisible(true);
+                    //this.dispose();
                     break;
                 }
                 else{
@@ -148,7 +145,7 @@ public class LoginView extends javax.swing.JFrame {
                 if (clientes.get(i).getNomeUsuario().equals(usuario)){
                     existe=true;
                     if (clientes.get(i).verificarLogin(senha)){
-                        new TelaOpcoesCliente(clientes.get(i),estantes).setVisible(true);
+                        new TelaOpcoesCliente(clientes.get(i),sistema.getEstantes()).setVisible(true);
                         break;
                     }
                     else{

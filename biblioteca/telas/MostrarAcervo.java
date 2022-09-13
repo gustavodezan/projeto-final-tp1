@@ -7,6 +7,7 @@ package biblioteca.telas;
 import java.util.ArrayList;
 import biblioteca.classes.Livro;
 import biblioteca.classes.Estante;
+import biblioteca.classes.Pedido;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -29,7 +30,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
         carregarTabela();
     }
     public void carregarTabela(){
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Data de Publicação","Genero","Quantidade de Páginas","Status","Autor","Editora"},0){
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Data de Publicação","Genero","Quantidade de Páginas","Status"},0){
             @Override
             public boolean isCellEditable(int row, int column){return false;}
         };
@@ -42,7 +43,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
         }
         for (int i=0;i < todosLivros.size();i++){
             Livro livro = todosLivros.get(i);
-            Object linha[] = {livro.getNome(),livro.getDataDePublicacao(),livro.getGenero(),livro.getQtDePaginas(),livro.isEmprestado(),livro.getAutor().getNome(),livro.getEditora().getNome()};
+            Object linha[] = {livro.getNome(),livro.getDataDePublicacao(),livro.getGenero(),livro.getQtDePaginas(),(livro.isEmprestado()) ? "Não Disponível": "Disponivel"};
             modelo.addRow(linha);
              
         }
@@ -62,16 +63,17 @@ public class MostrarAcervo extends javax.swing.JFrame {
         jButtonSolicitarEmprestimo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -106,7 +108,12 @@ public class MostrarAcervo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSolicitarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSolicitarEmprestimoActionPerformed
-        // TODO add your handling code here:
+        int index = jTable1.getSelectedRow();
+        if (index >=0 && index < todosLivros.size()){
+           Livro livroSelecionado = todosLivros.get(index);
+           Pedido solicitarEmprestimo = new Pedido();
+           
+        }
     }//GEN-LAST:event_jButtonSolicitarEmprestimoActionPerformed
 
     /**
