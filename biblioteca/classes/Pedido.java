@@ -29,12 +29,7 @@ public class Pedido {
     }
     
     public boolean verificarValidade(int limite){
-        if (numLivros <= limite) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return numLivros <= limite;
     }
     
     public void adicionarLivro(Livro livro) {

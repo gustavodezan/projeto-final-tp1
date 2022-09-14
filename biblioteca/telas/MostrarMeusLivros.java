@@ -4,6 +4,7 @@
  */
 package biblioteca.telas;
 
+import biblioteca.classes.Cliente;
 import biblioteca.classes.Livro;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MostrarMeusLivros extends javax.swing.JFrame {
     ArrayList<Livro> meusLivros = new ArrayList<>();
+    Cliente myUser = new Cliente();
     //private Object jTable1;
 
     /**
@@ -24,9 +26,9 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
         initComponents();
         carregarTabela();
     }
-    public MostrarMeusLivros(ArrayList<Livro> meusLivros){
+    public MostrarMeusLivros(Cliente myUser){
         initComponents();
-        this.meusLivros = meusLivros;
+        this.meusLivros = myUser.getLivrosEmprestados();
         carregarTabela();
     }
     //Livro livro = new Livro("joao","joao","joao",20);
@@ -56,6 +58,7 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButtonDevolverLivro = new javax.swing.JButton();
+        jButtonDevolverLivros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
@@ -80,22 +83,33 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
             }
         });
 
+        jButtonDevolverLivros.setText("Devolver tudo");
+        jButtonDevolverLivros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDevolverLivrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addGap(20, 20, 20)
                 .addComponent(jButtonDevolverLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonDevolverLivros, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonDevolverLivro)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDevolverLivro)
+                    .addComponent(jButtonDevolverLivros))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -106,15 +120,16 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
                                         
         int index = jTable1.getSelectedRow();
         if (index >=0 && index < meusLivros.size()){
-           Livro livroSelecionado = meusLivros.get(index);
-           if(livroSelecionado.isEmprestado()){
-               livroSelecionado.setEmprestado(false);
+           myUser.devolverLivro(meusLivros.get(index));
            }else{
                //messagem caso eu nao tenha pego o livro emprestado
                 JOptionPane.showMessageDialog(null,"Você não possui esse livro");
            }
-        }
     }//GEN-LAST:event_jButtonDevolverLivroActionPerformed
+
+    private void jButtonDevolverLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDevolverLivrosActionPerformed
+        myUser.devolverLivros();
+    }//GEN-LAST:event_jButtonDevolverLivrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +171,7 @@ public class MostrarMeusLivros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDevolverLivro;
+    private javax.swing.JButton jButtonDevolverLivros;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

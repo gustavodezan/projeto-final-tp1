@@ -64,7 +64,7 @@ public class Cliente extends Usuario {
     
     //public boolean solicitarEmprestimo(String nomeLivro,String genero){};
     
-    public boolean verificarLivro(String nomeLivro,ArrayList<ArrayList<Livro>> estantes){
+    /*public boolean verificarLivro(String nomeLivro,ArrayList<ArrayList<Livro>> estantes){
       for(ArrayList<Livro> estante: estantes){
           for(Livro livro:estante){
               if(livro.getNome().equals(nomeLivro)){
@@ -73,11 +73,12 @@ public class Cliente extends Usuario {
           }
       }
         return false;
-    }
+    }*/
     
     public void devolverLivro(Livro livro) {
         livro.devolver();
         livrosEmprestados.remove(livro);
+        livro.setEmprestado(false);
     }
     
     public void devolverLivros(){
@@ -85,9 +86,5 @@ public class Cliente extends Usuario {
            livrosEmprestados.get(i).setEmprestado(false);
        }
        livrosEmprestados.clear();
-    }
-    
-    public ArrayList<Livro> listarLivros(){
-       return this.historicoLivros;
     }
 }

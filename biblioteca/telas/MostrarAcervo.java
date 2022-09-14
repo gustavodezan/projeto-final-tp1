@@ -4,6 +4,7 @@
  */
 package biblioteca.telas;
 
+import biblioteca.classes.Cliente;
 import java.util.ArrayList;
 import biblioteca.classes.Livro;
 import biblioteca.classes.Estante;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 public class MostrarAcervo extends javax.swing.JFrame {
     ArrayList<Estante> estantes = new ArrayList<Estante>();
     ArrayList<Livro> todosLivros = new ArrayList<Livro>();
+    ArrayList<Livro> listaInteresse = new ArrayList<Livro>();
+    Cliente myUser = new Cliente();
     //Object[] linha;
     /**
      * Creates new form MostrarAcervo
@@ -24,7 +27,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
         initComponents();
         carregarTabela();
     }
-    public MostrarAcervo(ArrayList<Estante> estantes){
+    public MostrarAcervo(ArrayList<Estante> estantes,Cliente myUser){
         initComponents();
         this.estantes = estantes;
         carregarTabela();
@@ -61,6 +64,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButtonSolicitarEmprestimo = new javax.swing.JButton();
+        jButtonAdicionarLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
@@ -85,22 +89,33 @@ public class MostrarAcervo extends javax.swing.JFrame {
             }
         });
 
+        jButtonAdicionarLista.setText("Adicionar a Lista");
+        jButtonAdicionarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(31, 31, 31)
                 .addComponent(jButtonSolicitarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jButtonAdicionarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonSolicitarEmprestimo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSolicitarEmprestimo)
+                    .addComponent(jButtonAdicionarLista))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -108,13 +123,16 @@ public class MostrarAcervo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSolicitarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSolicitarEmprestimoActionPerformed
+        Pedido pedido = new Pedido(myUser.getId(),myUser,listaInteresse);
+    }//GEN-LAST:event_jButtonSolicitarEmprestimoActionPerformed
+
+    private void jButtonAdicionarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarListaActionPerformed
         int index = jTable1.getSelectedRow();
         if (index >=0 && index < todosLivros.size()){
            Livro livroSelecionado = todosLivros.get(index);
-           Pedido solicitarEmprestimo = new Pedido();
-           
+             listaInteresse.add(livroSelecionado);
         }
-    }//GEN-LAST:event_jButtonSolicitarEmprestimoActionPerformed
+    }//GEN-LAST:event_jButtonAdicionarListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,6 +170,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdicionarLista;
     private javax.swing.JButton jButtonSolicitarEmprestimo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
