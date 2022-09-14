@@ -1,48 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package biblioteca.telas;
 import biblioteca.classes.Cliente;
-import biblioteca.classes.Livro;
+import biblioteca.classes.Estante;
+import biblioteca.classes.GerenciarBiblioteca;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author jp
  */
 public class TelaOpcoesCliente extends javax.swing.JFrame {
-    ArrayList<Livro> meusLivros = new ArrayList<>();
-    private Object tblEscEst;
-
+    Cliente myUser = new Cliente();
+    ArrayList<Estante> estantes = new ArrayList<Estante>();
+    GerenciarBiblioteca sistema;
     /**
      * Creates new form TelaOpcoesCliente
      */
     public TelaOpcoesCliente() {
         initComponents();
         carregarTabela();
+        this.setExtendedState(MAXIMIZED_BOTH); 
     }
-    public TelaOpcoesCliente(ArrayList<Livro> meusLivros){
+    public TelaOpcoesCliente(Cliente myUser,ArrayList<Estante> estantes, GerenciarBiblioteca sistema){
         initComponents();
-        this.meusLivros = meusLivros;
+        this.myUser = myUser;
+        this.estantes = estantes;
         carregarTabela();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.sistema = sistema;
     }
     
     public void carregarTabela(){
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Data de Publicação","Genero","Quantidade de Páginas","Status"},0){
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"ID","Nome","Data de Inscrição","Nivel de Leitor","Livros Emprestados"},0){
             @Override
             public boolean isCellEditable(int row, int column){return false;}
         };
             
+        Object linha[] = {myUser.getId(),myUser.getNome(),myUser.getDataIncricao().getTime(),myUser.getNivelLeitor(),myUser.getLivrosEmprestados().size()};
+        modelo.addRow(linha);
         
-        for (int i=0;i < meusLivros.size();i++){
-            Object linha[] = {meusLivros.get(i).getNome(),meusLivros.get(i).getDataDePublicacao()
-                    ,meusLivros.get(i).getGenero(),meusLivros.get(i).getQtDePaginas(),meusLivros.get(i).isEmprestado()};
-            modelo.addRow(linha);
-        }
         jTable1.setModel(modelo);
-    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,19 +52,19 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonRefresh = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemMeusLivros = new javax.swing.JMenuItem();
+        jMenuItemAcervo = new javax.swing.JMenuItem();
+        jMenuItemEstantes = new javax.swing.JMenuItem();
+        jMenuItemHistorico = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,77 +76,132 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4", "null"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
 
-        jButton1.setText("Solicitar Emprestimo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png"))); // NOI18N
+
+        jButtonRefresh.setText("Recarregar");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonRefreshActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Devolver Livro");
-
-        jMenu3.setText("Cliente");
-
-        jMenuItem4.setText("ID");
-        jMenu3.add(jMenuItem4);
-
-        jMenuItem2.setText("Nome");
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem1.setText("Nivel de Leitor");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/employee.png"))); // NOI18N
+        jMenu1.setText("Cliente");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenu1ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
 
-        jMenuItem3.setText("Data de Inscrição");
-        jMenu3.add(jMenuItem3);
+        jMenuItemMeusLivros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, 0));
+        jMenuItemMeusLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        jMenuItemMeusLivros.setText("Meus Livros");
+        jMenuItemMeusLivros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMeusLivrosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemMeusLivros);
 
-        jMenuBar2.add(jMenu3);
+        jMenuItemAcervo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, 0));
+        jMenuItemAcervo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/bookshelf16x16.png"))); // NOI18N
+        jMenuItemAcervo.setText("Acervo");
+        jMenuItemAcervo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAcervoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemAcervo);
 
-        setJMenuBar(jMenuBar2);
+        jMenuItemEstantes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, 0));
+        jMenuItemEstantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/bookshelf16x16.png"))); // NOI18N
+        jMenuItemEstantes.setText("Estantes");
+        jMenuItemEstantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEstantesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemEstantes);
+
+        jMenuItemHistorico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, 0));
+        jMenuItemHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        jMenuItemHistorico.setText("Histórico");
+        jMenuItemHistorico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHistoricoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemHistorico);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(243, 243, 243)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(482, Short.MAX_VALUE))
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jButtonRefresh)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
+                .addComponent(jButtonRefresh)
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        //new MostrarMeusLivros(myUser.getHistoricoLivros()).setVisible(true);
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jMenuItemAcervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcervoActionPerformed
+        new MostrarAcervo(estantes, sistema).setVisible(true);
+    }//GEN-LAST:event_jMenuItemAcervoActionPerformed
+
+    private void jMenuItemMeusLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMeusLivrosActionPerformed
+        new MostrarMeusLivros(myUser.getLivrosEmprestados()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemMeusLivrosActionPerformed
+
+    private void jMenuItemEstantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstantesActionPerformed
+        new FuncFazerPedidoCliente(myUser, sistema).setVisible(true);
+    }//GEN-LAST:event_jMenuItemEstantesActionPerformed
+
+    private void jMenuItemHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoricoActionPerformed
+        new MostrarHistoricoLivros(myUser.getHistoricoLivros()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemHistoricoActionPerformed
+
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+        myUser.updateNivel();
+        carregarTabela();
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,16 +239,15 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAcervo;
+    private javax.swing.JMenuItem jMenuItemEstantes;
+    private javax.swing.JMenuItem jMenuItemHistorico;
+    private javax.swing.JMenuItem jMenuItemMeusLivros;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

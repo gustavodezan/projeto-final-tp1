@@ -2,9 +2,10 @@ package biblioteca.classes;
 
 public class Livro{
     private String nome,dataDePublicacao,genero;
-    private int qtDePaginas;
+    private int qtDePaginas, id;
     private boolean emprestado;
     private Autor autor;
+    private Estante estante;
     private Editora editora;
     
     public Livro() {
@@ -16,6 +17,26 @@ public class Livro{
         this.dataDePublicacao = dataDePublicacao;
         this.genero = genero;
         this.qtDePaginas = qtDePaginas;
+    }
+    
+    public Livro(String nome, String dataDePublicacao, String genero, int qtDePaginas, Autor autor, Estante estante) {
+        this.nome = nome;
+        this.dataDePublicacao = dataDePublicacao;
+        this.genero = genero;
+        this.qtDePaginas = qtDePaginas;
+        this.autor = autor;
+        this.estante = estante;
+    }
+
+    public Livro(int id, String nome, String dataDePublicacao, String genero, int qtDePaginas, Autor autor, Estante estante, Editora editora) {
+        this.id = id;
+        this.nome = nome;
+        this.dataDePublicacao = dataDePublicacao;
+        this.genero = genero;
+        this.qtDePaginas = qtDePaginas;
+        this.autor = autor;
+        this.estante = estante;
+        this.editora = editora;
     }
     
     public boolean emprestar() {
@@ -89,8 +110,14 @@ public class Livro{
     public void setEditora(Editora editora) {
         this.editora = editora;
     }
-    
-    
+
+    public Estante getEstante() {
+        return estante;
+    }
+
+    public void setEstante(Estante estante) {
+        this.estante = estante;
+    }
     
     public String mostrarInformacoes(){
         return "Nome: "+this.nome+"\nData de Publicação: "+this.dataDePublicacao

@@ -5,6 +5,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Estante;
+import biblioteca.classes.GerenciarBiblioteca;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,9 +24,9 @@ public class FuncRemoverEstante extends javax.swing.JFrame {
     /*Inicia os componentes da tela e conecta a variavel da tela com a referencia da lista de estantes 
     dada ao iniciar a tela */
     
-    public FuncRemoverEstante(ArrayList<Estante> estantes){
+    public FuncRemoverEstante(GerenciarBiblioteca sistema){
         initComponents();
-        this.estantes=estantes;
+        this.estantes=sistema.getEstantes();
         carregarTabela();
     }
     

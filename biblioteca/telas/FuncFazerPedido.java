@@ -6,6 +6,7 @@ package biblioteca.telas;
 
 import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
+import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
 import biblioteca.classes.Pedido;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class FuncFazerPedido extends javax.swing.JFrame {
     ArrayList<Estante> estantes = new ArrayList<>();
     Cliente cliente;
     ArrayList<Livro> livrosped=new  ArrayList<>();
+    GerenciarBiblioteca sistema;
     Pedido pedido=new Pedido();
     
     public FuncFazerPedido(){
@@ -30,10 +32,11 @@ public class FuncFazerPedido extends javax.swing.JFrame {
     e carrega a tabela de estantes para o usuario poder selecionar alguma para adicionar
     um livro*/
     
-    public FuncFazerPedido(Cliente cliente,ArrayList<Estante> estantes){
+    public FuncFazerPedido(Cliente cliente,GerenciarBiblioteca sistema){
         initComponents();
-        this.estantes=estantes;
+        this.estantes=sistema.getEstantes();
         this.cliente=cliente;
+        this.sistema=sistema;
         carregarTabela();
     }
     
@@ -202,7 +205,7 @@ public class FuncFazerPedido extends javax.swing.JFrame {
     private void btConfEscEstAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfEscEstAActionPerformed
         int ind = tblEscEst.getSelectedRow();
         if (ind >=0 && ind < estantes.size()){
-            new FuncEscolherLivPed(cliente,estantes.get(ind),livrosped,this).setVisible(true);
+            new FuncEscolherLivPed(estantes.get(ind),livrosped,this).setVisible(true);
         }
     }//GEN-LAST:event_btConfEscEstAActionPerformed
 
@@ -220,21 +223,22 @@ public class FuncFazerPedido extends javax.swing.JFrame {
         boolean Conf=pedido.efetuarPedido();
             
         if (Conf){
-            for (int i=0;i < livrosped.size();i++){
-                for(int j=0;j < estantes.size();j++){
-                    if (estantes.get(j).getEstante().contains(livrosped.get(i))){
-                        estantes.get(j).getEstante().get(estantes.get(j).getEstante().indexOf(livrosped.get(i))).emprestar();
-                        break;
-                    }
-                }
-            
-            }
+//            for (int i=0;i < livrosped.size();i++){
+//                for(int j=0;j < estantes.size();j++){
+//                    if (estantes.get(j).getEstante().contains(livrosped.get(i))){
+//                        estantes.get(j).getEstante().get(estantes.get(j).getEstante().indexOf(livrosped.get(i))).emprestar();
+//                        break;
+//                    }
+//                }
+//            
+//            }
             JOptionPane.showMessageDialog (null,"Pedido realizado com sucesso");
+            sistema.addPedido(pedido);
             livrosped.clear();
             this.carregarTabela2();
         }
         else{
-            JOptionPane.showMessageDialog (null,"Limite de Livros foi estorado");
+            JOptionPane.showMessageDialog (null,"Limite de Livros foi estourado");
             livrosped.clear();
             this.carregarTabela2();
             }

@@ -7,6 +7,7 @@ package biblioteca.telas;
 import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
 import biblioteca.classes.Funcionario;
+import biblioteca.classes.GerenciarBiblioteca;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,7 @@ import java.util.ArrayList;
  * @author jplim
  */
 public class TelaOpcoesFuncionario extends javax.swing.JFrame {
-    ArrayList<Estante> estantes = new ArrayList<>();
-    ArrayList<Cliente> clientes = new ArrayList<>(); 
+    GerenciarBiblioteca sistema;
     Funcionario funcionarioA;
     
     public TelaOpcoesFuncionario(){
@@ -27,9 +27,9 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
     /*Inicia os componentes da tela e conecta a variavel da tela com a referencia da lista de estantes 
     dada ao iniciar a tela */
     
-    public TelaOpcoesFuncionario(ArrayList<Estante> estantes,Funcionario funcionario) {
+    public TelaOpcoesFuncionario(GerenciarBiblioteca sistema,Funcionario funcionario) {
         initComponents();
-        this.estantes = estantes;
+        this.sistema=sistema;
         this.funcionarioA = funcionario;
         this.setExtendedState(MAXIMIZED_BOTH);
        
@@ -48,6 +48,7 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
         menuTelaOpcoesFuncionario = new javax.swing.JMenuBar();
         menuCliente = new javax.swing.JMenu();
         menuICadastrarClie = new javax.swing.JMenuItem();
+        menuMosLiv = new javax.swing.JMenuItem();
         menuIFazerpedido = new javax.swing.JMenuItem();
         menuFunc = new javax.swing.JMenu();
         menuCadFunc = new javax.swing.JMenuItem();
@@ -62,6 +63,7 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         simboloF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -80,6 +82,15 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
         });
         menuCliente.add(menuICadastrarClie);
 
+        menuMosLiv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/list.png"))); // NOI18N
+        menuMosLiv.setText("Ver Livros emprestados");
+        menuMosLiv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMosLivActionPerformed(evt);
+            }
+        });
+        menuCliente.add(menuMosLiv);
+
         menuIFazerpedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/sendfile_envia_13691.png"))); // NOI18N
         menuIFazerpedido.setText("Fazer pedido");
         menuIFazerpedido.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +102,7 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
 
         menuTelaOpcoesFuncionario.add(menuCliente);
 
+        menuFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/employee.png"))); // NOI18N
         menuFunc.setText("Funcionario");
 
         menuCadFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/add.png"))); // NOI18N
@@ -184,50 +196,56 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
     /*Abre a tela para cadastrar cliente */
     
     private void menuICadastrarClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuICadastrarClieActionPerformed
-        new TelaFuncionarioCadastrarClie(clientes).setVisible(true);
+        new TelaFuncionarioCadastrarClie(sistema).setVisible(true);
     }//GEN-LAST:event_menuICadastrarClieActionPerformed
     
     /*Abre a tela para fazer um pedido para um cliente (ainda não tem função)*/
     
     private void menuIFazerpedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIFazerpedidoActionPerformed
-        new FuncEscolherClie(clientes,estantes).setVisible(true);
+        new FuncEscolherClie(sistema).setVisible(true);
     }//GEN-LAST:event_menuIFazerpedidoActionPerformed
 
     /*Abre a tela para escolher uma estante onde se quer adicionar algum livro */
     
     private void menuIAddLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIAddLivroActionPerformed
-        new FuncEscolherEstanteA(estantes,funcionarioA).setVisible(true);
+        new FuncEscolherEstanteA(sistema,funcionarioA).setVisible(true);
     }//GEN-LAST:event_menuIAddLivroActionPerformed
     
     /*Abre a tela para escolher alguma estante para poder remover um livro dela */
     
     private void menuIRemDaEstanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIRemDaEstanteActionPerformed
-        new FuncEscolherEstanteR(estantes).setVisible(true);
+        new FuncEscolherEstanteR(sistema).setVisible(true);
     }//GEN-LAST:event_menuIRemDaEstanteActionPerformed
     
     /*Abre a tela de criação de estante */
     
     private void menuICriarEstanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuICriarEstanteActionPerformed
-        new FuncAdicionarEstante(estantes).setVisible(true);
+        new FuncAdicionarEstante(sistema).setVisible(true);
     }//GEN-LAST:event_menuICriarEstanteActionPerformed
     
     /*Abre a tela de escolha e edição de alguma estante */
     
     private void menuIEditarEstanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIEditarEstanteActionPerformed
-         new FuncEditarEstante(estantes).setVisible(true);
+         new FuncEditarEstante(sistema).setVisible(true);
     }//GEN-LAST:event_menuIEditarEstanteActionPerformed
     
     /*Abre a tela onde se escolhe e remove uma estante*/
     
     private void menuIRemEstanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIRemEstanteActionPerformed
-        new FuncRemoverEstante(estantes).setVisible(true);
+        new FuncRemoverEstante(sistema).setVisible(true);
     }//GEN-LAST:event_menuIRemEstanteActionPerformed
 
     //abre a tela para cadastrar um Funcionario
     
     private void menuCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadFuncActionPerformed
-        new CadastrarFunc().setVisible(true);
+        new CadastrarFunc(sistema).setVisible(true);
     }//GEN-LAST:event_menuCadFuncActionPerformed
+    
+    //abre a tela para mostrar os livros que estão emprestados para um cliente
+    
+    private void menuMosLivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMosLivActionPerformed
+        new FuncMostrarLivrosEmprestados(sistema).setVisible(true);
+    }//GEN-LAST:event_menuMosLivActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +297,7 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuIRemDaEstante;
     private javax.swing.JMenuItem menuIRemEstante;
     private javax.swing.JMenu menuLivros;
+    private javax.swing.JMenuItem menuMosLiv;
     private javax.swing.JMenuBar menuTelaOpcoesFuncionario;
     private javax.swing.JLabel simboloF;
     // End of variables declaration//GEN-END:variables

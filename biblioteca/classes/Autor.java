@@ -5,13 +5,21 @@ import java.util.ArrayList;
 
 public class Autor {
     private String nome,paisOrigem,dataDeNascimento;
-    private int qtdLivrosEscritos;
+    private int qtdLivrosEscritos, id;
     private ArrayList<Livro> livros= new ArrayList<>();
 
     public Autor() {
     }
 
     public Autor(String nome, String paisOrigem, String dataDeNascimento, int qtdLivrosEscritos) {
+        this.nome = nome;
+        this.paisOrigem = paisOrigem;
+        this.dataDeNascimento = dataDeNascimento;
+        this.qtdLivrosEscritos = qtdLivrosEscritos;
+    }
+    
+    public Autor(int id, String nome, String paisOrigem, String dataDeNascimento, int qtdLivrosEscritos) {
+        this.id = id;
         this.nome = nome;
         this.paisOrigem = paisOrigem;
         this.dataDeNascimento = dataDeNascimento;
@@ -60,6 +68,7 @@ public class Autor {
     
     public void escreveuLivro(Livro livro){
         livros.add(livro);
+        qtdLivrosEscritos += 1;
     }
     
 }

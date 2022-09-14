@@ -5,6 +5,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Funcionario;
+import biblioteca.classes.GerenciarBiblioteca;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,14 +13,16 @@ import javax.swing.JOptionPane;
  * @author jplim
  */
 public class CadastrarFunc extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadastrarFunc
-     */
+    GerenciarBiblioteca sistema;
+    
     public CadastrarFunc() {
         initComponents();
     }
-
+    
+    public CadastrarFunc(GerenciarBiblioteca sistema) {
+        initComponents();
+        this.sistema=sistema;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,13 +39,14 @@ public class CadastrarFunc extends javax.swing.JFrame {
         lbSetor = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         tfUsername = new javax.swing.JTextField();
-        tfSenha = new javax.swing.JTextField();
         tfCargo = new javax.swing.JTextField();
         tfSetor = new javax.swing.JTextField();
         btnConf = new javax.swing.JButton();
         btnCan = new javax.swing.JButton();
+        pfSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         lbNome.setText("Nome:");
 
@@ -86,9 +90,9 @@ public class CadastrarFunc extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(tfUsername)
-                            .addComponent(tfSenha)
                             .addComponent(tfCargo)
-                            .addComponent(tfSetor))
+                            .addComponent(tfSetor)
+                            .addComponent(pfSenha))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConf)
@@ -108,9 +112,9 @@ public class CadastrarFunc extends javax.swing.JFrame {
                     .addComponent(lbUsername)
                     .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbSenha))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbSenha)
+                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,16 +140,17 @@ public class CadastrarFunc extends javax.swing.JFrame {
     private void btnConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfActionPerformed
         String nome=tfNome.getText();
         String username=tfUsername.getText();
-        String senha=tfSenha.getText();
+        String senha=pfSenha.getText();
         String cargo=tfCargo.getText();
         String setor=tfSetor.getText();
         
         if (!nome.equals("") && !username.equals("") && !senha.equals("") && !cargo.equals("") && !setor.equals("")){
             Funcionario Funcionario = new Funcionario(nome,senha,username,cargo,setor);
+            sistema.addFuncionario(Funcionario);
             JOptionPane.showMessageDialog (null,"Funcionario cadastrado com sucesso.");
             tfNome.setText("");
             tfUsername.setText("");
-            tfSenha.setText("");
+            pfSenha.setText("");
             tfCargo.setText("");
             tfSetor.setText("");
         }
@@ -153,7 +158,7 @@ public class CadastrarFunc extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null,"valor(es) invalido(s)");
             tfNome.setText("");
             tfUsername.setText("");
-            tfSenha.setText("");
+            pfSenha.setText("");
             tfCargo.setText("");
             tfSetor.setText("");
         }
@@ -202,9 +207,9 @@ public class CadastrarFunc extends javax.swing.JFrame {
     private javax.swing.JLabel lbSenha;
     private javax.swing.JLabel lbSetor;
     private javax.swing.JLabel lbUsername;
+    private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfCargo;
     private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfSenha;
     private javax.swing.JTextField tfSetor;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables

@@ -4,8 +4,6 @@
  */
 package biblioteca.telas;
 
-import biblioteca.classes.Autor;
-import biblioteca.classes.Editora;
 import biblioteca.classes.Estante;
 import biblioteca.classes.Livro;
 import java.util.ArrayList;
@@ -16,17 +14,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jplim
  */
-public class FuncEscolherLivPed extends javax.swing.JFrame {
+public class FuncEscolherLivPedCliente extends javax.swing.JFrame {
     ArrayList<Livro> livros;
     ArrayList<Livro> livrosped;
     ArrayList<Integer> inds = new ArrayList<>();
-    FuncFazerPedido ped;
+    FuncFazerPedidoCliente ped;
     
-    public FuncEscolherLivPed() {
+    public FuncEscolherLivPedCliente() {
         initComponents();
     }
     
-    public FuncEscolherLivPed(Estante estante,ArrayList<Livro> livrosped,FuncFazerPedido ped) {
+    public FuncEscolherLivPedCliente(Estante estante,ArrayList<Livro> livrosped,FuncFazerPedidoCliente ped) {
         initComponents();
         lbEst.setText(estante.getIdentificacao());
         this.livros=estante.getEstante();
@@ -36,27 +34,21 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
     }
     
      public void carregarTabela(){
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Autor","Data de Publicação","Genero","Quantidade de Paginas","Disponibilidade","Editora"},0){
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Data de Publicação","Genero","Quantidade de Paginas","Disponibilidade"},0){
             @Override
             public boolean isCellEditable(int row, int column){return false;}};
         inds.clear();
         String emprestado;
-        String autor;
-        String editora;
         for (int i=0;i < livros.size();i++){
             if (!livros.get(i).isEmprestado()){
-                autor = livros.get(i).getAutor().getNome();
-                editora = livros.get(i).getEditora().getNome();
-                Object linha[] = {livros.get(i).getNome(),autor,livros.get(i).getDataDePublicacao(),livros.get(i).getGenero(),livros.get(i).getQtDePaginas(),"Disponível",editora};
+                Object linha[] = {livros.get(i).getNome(),livros.get(i).getDataDePublicacao(),livros.get(i).getGenero(),livros.get(i).getQtDePaginas(),"Disponível"};
                 modelo.addRow(linha);
                 inds.add(livros.indexOf(livros.get(i)));
             }
         }
         for (int i=0; i < livros.size(); i++) {
             if (livros.get(i).isEmprestado()){
-                autor = livros.get(i).getAutor().getNome();
-                editora = livros.get(i).getEditora().getNome();
-                Object linha[] = {livros.get(i).getNome(),autor,livros.get(i).getDataDePublicacao(),livros.get(i).getGenero(),livros.get(i).getQtDePaginas(),"Indisponivel",editora};
+                Object linha[] = {livros.get(i).getNome(),livros.get(i).getDataDePublicacao(),livros.get(i).getGenero(),livros.get(i).getQtDePaginas(),"Indisponivel"};
                 modelo.addRow(linha);
                 inds.add(livros.indexOf(livros.get(i)));
             }
@@ -80,7 +72,6 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
         btnAdcP = new javax.swing.JButton();
         btnRemP = new javax.swing.JButton();
         lbEst = new javax.swing.JLabel();
-        jButtonInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Fazer Pedido");
@@ -115,13 +106,6 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
 
         lbEst.setText("\"\"");
 
-        jButtonInfo.setText("Informações");
-        jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInfoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,13 +115,11 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(69, 69, 69)
                 .addComponent(btnAdcP)
-                .addGap(32, 32, 32)
-                .addComponent(jButtonInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRemP)
-                .addGap(75, 75, 75))
+                .addGap(88, 88, 88))
             .addGroup(layout.createSequentialGroup()
                 .addGap(247, 247, 247)
                 .addComponent(lbEst)
@@ -152,8 +134,7 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdcP)
-                    .addComponent(btnRemP)
-                    .addComponent(jButtonInfo))
+                    .addComponent(btnRemP))
                 .addGap(35, 35, 35))
         );
 
@@ -184,13 +165,6 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
             this.carregarTabela();
         }
     }//GEN-LAST:event_btnRemPActionPerformed
-
-    private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
-        int ind = tblAdcPed.getSelectedRow();
-        if (ind >=0 && ind < livros.size()){
-            new InformacoesAutor(livros.get(ind).getAutor(), livros.get(ind).getEditora()).setVisible(true);
-        }
-    }//GEN-LAST:event_jButtonInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,7 +205,6 @@ public class FuncEscolherLivPed extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdcP;
     private javax.swing.JButton btnRemP;
-    private javax.swing.JButton jButtonInfo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbEst;
     private javax.swing.JTable tblAdcPed;

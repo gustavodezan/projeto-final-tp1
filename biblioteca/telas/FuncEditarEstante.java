@@ -5,6 +5,7 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Estante;
+import biblioteca.classes.GerenciarBiblioteca;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +24,9 @@ public class FuncEditarEstante extends javax.swing.JFrame {
     }
     /*Inicia os componentes da tela e conecta as variaveis locais com as referencias e inicia o 
     carregamento da tabela*/
-    public FuncEditarEstante(ArrayList<Estante> estantes) {
+    public FuncEditarEstante(GerenciarBiblioteca sistema) {
         initComponents();
-        this.estantes=estantes;
+        this.estantes=sistema.getEstantes();
         carregarTabela();
         
     }
@@ -200,8 +201,9 @@ public class FuncEditarEstante extends javax.swing.JFrame {
 
 
             if (!id.equals("") && !local.equals("") && !genero.equals("")){
-                Estante estante1 = new Estante(id,local,genero);
-                estantes.set(ind,estante1);
+                estantes.get(ind).setIdentificacao(id);
+                estantes.get(ind).setLocalizacao(local);
+                estantes.get(ind).setGenero(genero);
                 tfEdtId.setText("");
                 tfEdtLoc.setText("");
                 tfEdtGen.setText("");

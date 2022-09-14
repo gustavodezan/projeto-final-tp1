@@ -5,8 +5,8 @@
 package biblioteca.telas;
 
 import biblioteca.classes.Cliente;
-import biblioteca.classes.Estante;
 import biblioteca.classes.GerenciarBiblioteca;
+import biblioteca.classes.Livro;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,25 +14,22 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jplim
  */
-public class FuncEscolherClie extends javax.swing.JFrame {
+public class FuncMostrarLivrosEmprestados extends javax.swing.JFrame {
     ArrayList<Cliente> clientes;
-    ArrayList<Estante> estantes;
-    GerenciarBiblioteca sistema;
+    ArrayList<Livro> livros;
     
-    public FuncEscolherClie() {
+    public FuncMostrarLivrosEmprestados() {
         initComponents();
     }
     
-    //inicia a tela e carrega a tabela
-    public FuncEscolherClie(GerenciarBiblioteca sistema) {
+    public FuncMostrarLivrosEmprestados(GerenciarBiblioteca sistema) {
         initComponents();
-        this.clientes=sistema.getClientes();
-        this.estantes=sistema.getEstantes();
-        this.sistema=sistema;
+        this.clientes = sistema.getClientes();
+        livros = new ArrayList<>();
         this.carregarTabela();
+        this.carregarTabela2();
     }
     
-    //carrega a tabela
     public void carregarTabela(){
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Nome de usuario"},0){
             @Override
@@ -47,6 +44,19 @@ public class FuncEscolherClie extends javax.swing.JFrame {
         tblClie.setModel(modelo);
     }
     
+    public void carregarTabela2(){
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome","Data de Publicação","Genero","Quantidade de Paginas"},0){
+            @Override
+            public boolean isCellEditable(int row, int column){return false;}};
+        for (int i=0;i < livros.size();i++){
+            Object linha[] = {livros.get(i).getNome(),livros.get(i).getDataDePublicacao(),livros.get(i).getGenero(),livros.get(i).getQtDePaginas()};
+            modelo.addRow(linha);  
+        }
+        tblLivEmp.setModel(modelo);
+     }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,42 +69,26 @@ public class FuncEscolherClie extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClie = new javax.swing.JTable();
         btnConf = new javax.swing.JButton();
-        btnCan = new javax.swing.JButton();
+        btnCanc = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLivEmp = new javax.swing.JTable();
+        lbLivEmp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
 
         tblClie.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nome", "Nome de Usuario"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblClie);
-        if (tblClie.getColumnModel().getColumnCount() > 0) {
-            tblClie.getColumnModel().getColumn(0).setResizable(false);
-            tblClie.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         btnConf.setText("Confirmar");
         btnConf.addActionListener(new java.awt.event.ActionListener() {
@@ -103,57 +97,80 @@ public class FuncEscolherClie extends javax.swing.JFrame {
             }
         });
 
-        btnCan.setText("Cancelar");
-        btnCan.addActionListener(new java.awt.event.ActionListener() {
+        btnCanc.setText("Cancelar");
+        btnCanc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCanActionPerformed(evt);
+                btnCancActionPerformed(evt);
             }
         });
+
+        tblLivEmp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblLivEmp);
+
+        lbLivEmp.setText("Livros emprestados:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addGap(112, 112, 112)
                 .addComponent(btnConf)
-                .addGap(61, 61, 61)
-                .addComponent(btnCan)
-                .addGap(69, 69, 69))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCanc)
+                .addGap(110, 110, 110))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(198, 198, 198)
+                .addComponent(lbLivEmp)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConf)
-                    .addComponent(btnCan))
-                .addGap(0, 87, Short.MAX_VALUE))
+                    .addComponent(btnCanc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(lbLivEmp)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    //fecha a tela
-    
-    private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCanActionPerformed
-    
-    /*se um cliente estiver selecionado abre a tela para fazer um pedido para 
-    esse cliente */
-    
+
     private void btnConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfActionPerformed
         int ind = tblClie.getSelectedRow();
         if (ind >=0 && ind < clientes.size()){
-            new FuncFazerPedido(clientes.get(ind),sistema).setVisible(true);
+            livros = clientes.get(ind).getLivrosEmprestados();
+            this.carregarTabela2();
         }
     }//GEN-LAST:event_btnConfActionPerformed
+
+    private void btnCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,28 +189,31 @@ public class FuncEscolherClie extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FuncEscolherClie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncMostrarLivrosEmprestados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FuncEscolherClie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncMostrarLivrosEmprestados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FuncEscolherClie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncMostrarLivrosEmprestados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FuncEscolherClie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FuncMostrarLivrosEmprestados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FuncEscolherClie().setVisible(true);
+                new FuncMostrarLivrosEmprestados().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCan;
+    private javax.swing.JButton btnCanc;
     private javax.swing.JButton btnConf;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbLivEmp;
     private javax.swing.JTable tblClie;
+    private javax.swing.JTable tblLivEmp;
     // End of variables declaration//GEN-END:variables
 }

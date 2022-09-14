@@ -24,6 +24,14 @@ public class Cliente extends Usuario {
         this.nivelLeitor = nivelLeitor;
         this.livrosEmprestados = new ArrayList<>();
     }
+    public Cliente(int id, String nome,String senha,String username,
+    ArrayList<Livro> historicoLivros,GregorianCalendar dataInscricao,int nivelLeitor){
+        super(nome,username,senha,id);
+        this.historicoLivros = historicoLivros;
+        this.dataInscricao = dataInscricao;
+        this.nivelLeitor = nivelLeitor;
+        this.livrosEmprestados = new ArrayList<>();
+    }
     public Cliente(String nome, String senha, String username) {
         super(nome,username,senha);
         this.historicoLivros = new ArrayList<Livro>();
@@ -31,6 +39,15 @@ public class Cliente extends Usuario {
         this.nivelLeitor = 0;
         this.livrosEmprestados = new ArrayList<>();
     }
+    
+    public Cliente(String nome,String senha,String username, ArrayList<Livro> historicoLivros,GregorianCalendar dataInscricao,int nivelLeitor, ArrayList<Livro> emprestado){
+        super(nome,username,senha);
+        this.historicoLivros = historicoLivros;
+        this.dataInscricao = dataInscricao;
+        this.nivelLeitor = nivelLeitor;
+        this.livrosEmprestados = emprestado;
+    }
+    
     public ArrayList getHistoricoLivros(){
         return this.historicoLivros;
     }
@@ -52,6 +69,7 @@ public class Cliente extends Usuario {
  
     public void addLivroEmprestado(Livro livro) {
         livrosEmprestados.add(livro);
+        historicoLivros.add(livro);
     }
     
     public ArrayList<Livro> getLivrosEmprestados() {
@@ -75,9 +93,14 @@ public class Cliente extends Usuario {
         return false;
     }
     
+    public void updateNivel(){
+        nivelLeitor = (int) (historicoLivros.size() / 5);
+    }
+
     public void devolverLivro(Livro livro) {
         livro.devolver();
         livrosEmprestados.remove(livro);
+        nivelLeitor = (int) (historicoLivros.size() / 5);
     }
     
     public void devolverLivros(){

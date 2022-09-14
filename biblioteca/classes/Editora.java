@@ -2,23 +2,42 @@ package biblioteca.classes;
 
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 
 public class Editora {
-    private String nome,paisOrigem,dataCriacao;
-    private int qtdLivrosPublicados;
+    private String nome,paisOrigem;
+    private GregorianCalendar dataCriacao;
+    private int qtdLivrosPublicados, id;
     private ArrayList<Livro> livros= new ArrayList<>();
     
     public Editora() {
     }
 
-    public Editora(String nome, String paisOrigem, String dataCriacao, int qtdLivrosPublicados) {
+    public Editora(String nome, String paisOrigem, GregorianCalendar dataCriacao, int qtdLivrosPublicados) {
         this.nome = nome;
         this.paisOrigem = paisOrigem;
         this.dataCriacao = dataCriacao;
         this.qtdLivrosPublicados = qtdLivrosPublicados;
     }
+    
+    public Editora(String nome, String paisOrigem, GregorianCalendar dataCriacao) {
+        this.nome = nome;
+        this.paisOrigem = paisOrigem;
+        this.dataCriacao = dataCriacao;
+    }
+    
+    public Editora(int id, String nome, String paisOrigem, GregorianCalendar dataCriacao) {
+        this.id = id;
+        this.nome = nome;
+        this.paisOrigem = paisOrigem;
+        this.dataCriacao = dataCriacao;
+    }
 
+    public void addLivro(Livro livro) {
+        this.livros.add(livro);
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -35,11 +54,11 @@ public class Editora {
         this.paisOrigem = paisOrigem;
     }
 
-    public String getDataCriacao() {
+    public GregorianCalendar getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(String dataCriacao) {
+    public void setDataCriacao(GregorianCalendar dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 

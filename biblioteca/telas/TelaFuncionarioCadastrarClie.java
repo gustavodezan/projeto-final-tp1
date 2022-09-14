@@ -4,6 +4,7 @@
  */
 package biblioteca.telas;
 import biblioteca.classes.Cliente;
+import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,16 +16,17 @@ import javax.swing.JOptionPane;
  * @author jplim
  */
 public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
-ArrayList<Cliente> clientes;
+    ArrayList<Cliente> clientes;
 
+    
     public TelaFuncionarioCadastrarClie(){
         initComponents();
     }
     
     //cria a tela e seus componentes
-    public TelaFuncionarioCadastrarClie(ArrayList<Cliente> clientes) {
+    public TelaFuncionarioCadastrarClie(GerenciarBiblioteca sistema) {
         initComponents();
-        this.clientes=clientes;
+        this.clientes=sistema.getClientes();
     }
 
     /**
@@ -41,10 +43,10 @@ ArrayList<Cliente> clientes;
         jLbSenha = new javax.swing.JLabel();
         lbUsername = new javax.swing.JLabel();
         jTfNome = new javax.swing.JTextField();
-        jTfSenha = new javax.swing.JTextField();
         tfUsername = new javax.swing.JTextField();
         jBtConf = new javax.swing.JButton();
         jBtCanc = new javax.swing.JButton();
+        pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
@@ -81,9 +83,9 @@ ArrayList<Cliente> clientes;
                             .addComponent(jLbSenha)
                             .addComponent(jLbNome))
                         .addGap(63, 63, 63)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jTfNome))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lbUsername)
@@ -108,7 +110,7 @@ ArrayList<Cliente> clientes;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLbSenha)
-                    .addComponent(jTfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbUsername)
@@ -148,11 +150,8 @@ ArrayList<Cliente> clientes;
     
     private void jBtConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtConfActionPerformed
         String nome = jTfNome.getText();
-        String senha = jTfSenha.getText();
+        String senha = pfSenha.getText();
         GregorianCalendar cal = new GregorianCalendar();
-//        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-//        fmt.setCalendar(cal);
-//        String dataIns =fmt.format(cal.getTime());
         String username = tfUsername.getText();
 
        
@@ -162,13 +161,13 @@ ArrayList<Cliente> clientes;
             clientes.add(cliente);
             JOptionPane.showMessageDialog (null,"Cliente cadastrado com sucesso.");
             jTfNome.setText("");
-            jTfSenha.setText("");
+            pfSenha.setText("");
             tfUsername.setText("");
         }
         else{
             JOptionPane.showMessageDialog (null,"valor(es) invalido(s)");
             jTfNome.setText("");
-            jTfSenha.setText("");
+            pfSenha.setText("");
             tfUsername.setText("");
         }
                                
@@ -223,8 +222,8 @@ ArrayList<Cliente> clientes;
     private javax.swing.JLabel jLbSenha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTfNome;
-    private javax.swing.JTextField jTfSenha;
     private javax.swing.JLabel lbUsername;
+    private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,13 +28,22 @@ public class Pedido {
         this.data = new GregorianCalendar();
     }
     
+    public Pedido(Cliente cliente) {
+        this.cliente = cliente;
+        livros = new ArrayList<Livro>();
+        data = new GregorianCalendar();
+    }
+    
+    public Pedido(int id, Cliente cliente, ArrayList<Livro> livros, GregorianCalendar data) {
+        this.id = id;
+        this.numLivros = livros.size();
+        this.livros = livros;
+        this.cliente = cliente;
+        this.data = data;
+    }
+    
     public boolean verificarValidade(int limite){
-        if (numLivros <= limite) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return numLivros <= limite;
     }
     
     public void adicionarLivro(Livro livro) {
