@@ -1,0 +1,48 @@
+ {
+    "sistema":{
+        "id_cliente": 2,
+        "id_funcionario": 1,
+        "id_estante": 3,
+        "id_pedido": 2,
+        "id_livro": 4,
+        "id_editora": 3,
+        "id_autor": 4
+    },
+    "funcionarios": [
+        {"nome":"admin", "usuario":"admin", "senha":"admin", "funcao":"admin","setor":"admin"}
+    ],
+    "estantes":[
+        {"id":"A", "ala":"Ala 1", "generos":"Aventura"},
+        {"id":"B", "ala":"Ala 2", "generos":"Sci-Fi"},
+        {"id":"C", "ala":"Ala 3", "generos":"Drama"}
+    ],
+    "editoras":[
+        {"id": 0, "nome":"Harper Collins Brasil", "pais":"Brasil", "fundacao":"2015/01/01"},
+        {"id": 1, "nome":"Aleph", "pais":"Brasil", "fundacao":"1986/01/01"},
+        {"id": 2, "nome":"Zahar", "pais":"Rio de Janeiro, Brasil", "fundacao":"1957/01/01"}
+    ],
+    "autores":[
+        {"id": 0,"nome":"J. R. R. Tolkien", "pais":"Inglaterra","nascimento":"03/01/1892", "livros":0},
+        {"id": 1,"nome":"Willian Gibson", "pais":"Estados Unidos","nascimento":"17/02/1948", "livros":0},
+        {"id": 2,"nome":"Alexandre Dumas", "pais":"França","nascimento":"24/07/1802", "livros":0},
+        {"id": 3,"nome":"Arthur Conan Doyle", "pais":"Inglaterra","nascimento":"22/05/1859", "livros":0}
+    ],
+    "livros":[
+        {"id": 0, "nome":"O Hobbit", "publicado":"21/09/1937", "genero":"Aventura", "paginas":299, "editora": 0, "autor": 0, "estante": "A"},
+        {"id": 1, "nome":"Neuromancer", "publicado":"01/06/1984", "genero":"Sci-Fi", "paginas":319, "editora":1, "autor": 1, "estante":"B"},
+        {"id": 2, "nome":"O Conde de Monte Cristo - Volume 1", "publicado":"1846", "genero":"Drama", "paginas": 719, "editora":2, "autor":2, "estante":"C"},
+        {"id": 3, "nome":"Um Estudo em Vermelho", "publicado":"1887", "genero":"Investigação", "paginas": 190, "editora":2, "autor":3, "estante":"C"}
+    ],
+    "pedidos":[
+        {"id": 0, "cliente": 0, "livros": [0,2], "data": "2022/09/01"},
+        {"id": 1, "cliente": 0, "livros": [3], "data": "2022/09/14"}
+    ],
+    "clientes":[
+        {"nome":"root", "usuario":"root", "senha":"root","nivel":1,"data_registro": "2022/09/14","historico": [
+            {"livro":0},
+            {"livro":2},
+            {"livro":3}],
+        "emprestados":[]},
+        {"nome": "123", "usuario": "123", "senha": "123","nivel":0,"data_registro": "2022/09/14","historico": [],"emprestados":[]}
+    ]
+}
