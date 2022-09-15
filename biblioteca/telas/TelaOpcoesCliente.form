@@ -21,7 +21,7 @@
                   <KeyStroke key="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/biblioteca/imagens/livro16x16.png"/>
+                  <Image iconType="3" name="/biblioteca/imagens/list.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Meus Livros"/>
               </Properties>
@@ -35,7 +35,7 @@
                   <KeyStroke key="2"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/biblioteca/imagens/bookshelf16x16.png"/>
+                  <Image iconType="3" name="/biblioteca/imagens/livro16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Acervo"/>
               </Properties>
@@ -63,7 +63,7 @@
                   <KeyStroke key="4"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/biblioteca/imagens/livro16x16.png"/>
+                  <Image iconType="3" name="/biblioteca/imagens/list.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Hist&#xf3;rico"/>
               </Properties>
@@ -76,9 +76,9 @@
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/biblioteca/imagens/employee.png"/>
+              <Image iconType="3" name="/biblioteca/imagens/livro16x16.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cliente"/>
+            <Property name="text" type="java.lang.String" value="Outros"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu2ActionPerformed"/>
@@ -90,7 +90,7 @@
                   <KeyStroke key="Ctrl+1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/biblioteca/imagens/livro16x16.png"/>
+                  <Image iconType="3" name="/biblioteca/imagens/publisher.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ver Editoras"/>
               </Properties>
@@ -104,7 +104,7 @@
                   <KeyStroke key="Ctrl+2"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/biblioteca/imagens/bookshelf16x16.png"/>
+                  <Image iconType="3" name="/biblioteca/imagens/author.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ver Autores"/>
               </Properties>

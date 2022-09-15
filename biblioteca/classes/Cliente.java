@@ -49,10 +49,10 @@ public class Cliente extends Usuario {
         this.livrosEmprestados = emprestado;
     }
     
-    public ArrayList getHistoricoLivros(){
+    public ArrayList<Livro> getHistoricoLivros(){
         return this.historicoLivros;
     }
-    public void setHistoricoLivros(ArrayList historicoLivros){
+    public void setHistoricoLivros(ArrayList<Livro> historicoLivros){
         this.historicoLivros = historicoLivros;
     }
     public GregorianCalendar getDataIncricao(){

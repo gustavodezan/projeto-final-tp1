@@ -112,7 +112,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         });
 
         jMenuItemMeusLivros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, 0));
-        jMenuItemMeusLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        jMenuItemMeusLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/list.png"))); // NOI18N
         jMenuItemMeusLivros.setText("Meus Livros");
         jMenuItemMeusLivros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         jMenu1.add(jMenuItemMeusLivros);
 
         jMenuItemAcervo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, 0));
-        jMenuItemAcervo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/bookshelf16x16.png"))); // NOI18N
+        jMenuItemAcervo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
         jMenuItemAcervo.setText("Acervo");
         jMenuItemAcervo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +142,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         jMenu1.add(jMenuItemEstantes);
 
         jMenuItemHistorico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, 0));
-        jMenuItemHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        jMenuItemHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/list.png"))); // NOI18N
         jMenuItemHistorico.setText("Histórico");
         jMenuItemHistorico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,8 +153,8 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/employee.png"))); // NOI18N
-        jMenu2.setText("Cliente");
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        jMenu2.setText("Outros");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu2ActionPerformed(evt);
@@ -162,7 +162,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         });
 
         viewEditora.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        viewEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        viewEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/publisher.png"))); // NOI18N
         viewEditora.setText("Ver Editoras");
         viewEditora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +172,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         jMenu2.add(viewEditora);
 
         viewAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        viewAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/bookshelf16x16.png"))); // NOI18N
+        viewAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/author.png"))); // NOI18N
         viewAutor.setText("Ver Autores");
         viewAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +249,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_viewEditoraActionPerformed
 
     private void viewAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAutorActionPerformed
-        new ExibirAutores(sistema).setVisible(true);
+        new ExibirAutor(sistema).setVisible(true);
     }//GEN-LAST:event_viewAutorActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed

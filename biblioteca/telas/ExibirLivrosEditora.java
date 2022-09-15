@@ -29,6 +29,7 @@ public class ExibirLivrosEditora extends javax.swing.JFrame {
         initComponents();
         this.sistema = sistema;
         this.editora = editora;
+        carregarInfor2();
     }
 
     public void carregarInfor2(){
@@ -71,7 +72,7 @@ public class ExibirLivrosEditora extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -305,7 +305,7 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_addEditActionPerformed
 
     private void viewAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAutorActionPerformed
-        new ExibirAutores(sistema).setVisible(true);
+        new ExibirAutor(sistema).setVisible(true);
     }//GEN-LAST:event_viewAutorActionPerformed
 
     private void viewEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditoraActionPerformed
