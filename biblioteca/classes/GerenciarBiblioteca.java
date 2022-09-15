@@ -51,7 +51,6 @@ public class GerenciarBiblioteca {
         // read file
         try {
             Map<String, Object> map = mapper.readValue(this.getClass().getResource("../data/database.json"), Map.class);
-            System.out.println(map);
             // get sistema
             Map<String, Object> sistema = (Map<String, Object>) map.get("sistema");
             this.id_cliente = (int) sistema.get("id_cliente");
@@ -85,7 +84,6 @@ public class GerenciarBiblioteca {
                 this.estantes.add(est);
                 
             }
-            System.out.println(this.estantes.toString());
             // get editoras (id, nome, pais , fundacao)
             ArrayList<Map<String, Object>> editoras = (ArrayList<Map<String, Object>>) map.get("editoras");
             for (Map<String, Object> editora : editoras) {
@@ -135,7 +133,6 @@ public class GerenciarBiblioteca {
                 Estante estante = new Estante();
                 for (Estante e : this.estantes) {
                     if (e.getIdentificacao().equals(livro.get("estante"))) {
-                        System.out.println(e.getIdentificacao());
                         estante = e;
                         break;
                     }
@@ -350,9 +347,6 @@ public class GerenciarBiblioteca {
     }
     
     public ArrayList<Cliente> getClientes() {
-//        System.out.println(this.clientes);
-//        System.out.println(this.funcionarios);
-//        System.out.println(this.livros);
         
         return clientes;
     }
