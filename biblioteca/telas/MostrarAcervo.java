@@ -10,6 +10,10 @@ import biblioteca.classes.Livro;
 import biblioteca.classes.Estante;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Pedido;
+import java.net.URISyntaxException;
+import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -90,6 +94,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
         jButtonFazerPedido = new javax.swing.JButton();
         jButtonAdicionarBolsa1 = new javax.swing.JButton();
         jButtonAutor1 = new javax.swing.JButton();
+        jButtonOrdenar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
@@ -134,10 +139,17 @@ public class MostrarAcervo extends javax.swing.JFrame {
             }
         });
 
-        jButtonAutor1.setText("Informações do autor");
+        jButtonAutor1.setText("Informações");
         jButtonAutor1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAutor1ActionPerformed(evt);
+            }
+        });
+
+        jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
             }
         });
 
@@ -149,10 +161,11 @@ public class MostrarAcervo extends javax.swing.JFrame {
             .addComponent(jScrollPaneBolsa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonFazerPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAdicionarBolsa1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAutor1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButtonFazerPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(jButtonAdicionarBolsa1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(jButtonAutor1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(jButtonOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(254, 254, 254))
         );
         layout.setVerticalGroup(
@@ -161,20 +174,28 @@ public class MostrarAcervo extends javax.swing.JFrame {
                 .addComponent(jScrollPaneAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneBolsa, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonAutor1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAdicionarBolsa1)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonFazerPedido)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonOrdenar)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonFazerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFazerPedidoActionPerformed
+        pedido.setId(sistema.incrementIDPedido());
         pedido.efetuarPedido();
+        try {
+            sistema.saveData();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(MostrarAcervo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonFazerPedidoActionPerformed
 
     private void jButtonAdicionarBolsa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarBolsa1ActionPerformed
@@ -191,6 +212,10 @@ public class MostrarAcervo extends javax.swing.JFrame {
         Autor autor = todosLivros.get(index).getAutor();
         new InformacoesAutor(autor, todosLivros.get(index).getEditora()).setVisible(true);
     }//GEN-LAST:event_jButtonAutor1ActionPerformed
+
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        todosLivros.sort(Comparator.comparing(Livro::getGenero));
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,6 +256,7 @@ public class MostrarAcervo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdicionarBolsa1;
     private javax.swing.JButton jButtonAutor1;
     private javax.swing.JButton jButtonFazerPedido;
+    private javax.swing.JButton jButtonOrdenar;
     private javax.swing.JScrollPane jScrollPaneAcervo;
     private javax.swing.JScrollPane jScrollPaneBolsa;
     private javax.swing.JTable jTable1;

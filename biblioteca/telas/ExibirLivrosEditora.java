@@ -4,9 +4,10 @@
  */
 package biblioteca.telas;
 
-import biblioteca.classes.Autor;
+import biblioteca.classes.Editora;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,36 +15,37 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gusta
  */
-public class ExibirLivrosAutor extends javax.swing.JFrame {
+public class ExibirLivrosEditora extends javax.swing.JFrame {
     GerenciarBiblioteca sistema;
-    Autor autor;
+    Editora editora;
     /**
-     * Creates new form ExibirLivrosAutor
+     * Creates new form ExibirLivrosEditora
      */
-    public ExibirLivrosAutor() {
+    public ExibirLivrosEditora() {
         initComponents();
-        carregarInfo();
     }
     
-    public ExibirLivrosAutor(GerenciarBiblioteca sistema, Autor autor) {
+    public ExibirLivrosEditora(GerenciarBiblioteca sistema, Editora editora) {
         initComponents();
         this.sistema = sistema;
-        this.autor = autor;
-        carregarInfo();
+        this.editora = editora;
     }
 
-    public void carregarInfo(){
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Informações do autor"},0){
+    public void carregarInfor2(){
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Informações da editora"},0){
             @Override
             public boolean isCellEditable(int row, int column){return false;}
         };
-        ArrayList<Livro> livros = autor.getLivros();
+        
+        ArrayList<Livro> livros = editora.getLivros();
         ArrayList<Object> lista = new ArrayList<>();
         
-        lista.add("Nome: "+ autor.getNome());
-        lista.add("Data de nascimento: " + autor.getDataDeNascimento());
-        lista.add("País de origem: " + autor.getPaisOrigem());
-        lista.add("Livros publicados: " + autor.getLivros().size());
+        lista.add("Nome: " + editora.getNome());
+        String expectedDate = editora.getDataCriacao().toZonedDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu"));
+        lista.add("Fundada: " + expectedDate);
+        lista.add("País: " + editora.getPaisOrigem());
+        lista.add("Livros publicados: " + editora.getLivros().size());
+        
         for (int i = 0; i < lista.size(); i++) {
            Object linha0[] = {lista.get(i)};
            modelo.addRow(linha0);
@@ -55,7 +57,8 @@ public class ExibirLivrosAutor extends javax.swing.JFrame {
             modelo.addRow(linha);
              
         }
-        jTable1.setModel(modelo);    }
+        jTable1.setModel(modelo);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,13 +90,11 @@ public class ExibirLivrosAutor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
         );
 
         pack();
@@ -116,20 +117,20 @@ public class ExibirLivrosAutor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExibirLivrosAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirLivrosEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExibirLivrosAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirLivrosEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExibirLivrosAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirLivrosEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExibirLivrosAutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirLivrosEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExibirLivrosAutor().setVisible(true);
+                new ExibirLivrosEditora().setVisible(true);
             }
         });
     }

@@ -59,8 +59,10 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
         menuIEditarEstante = new javax.swing.JMenuItem();
         menuIRemEstante = new javax.swing.JMenuItem();
         menuAutor = new javax.swing.JMenu();
+        viewAutor = new javax.swing.JMenuItem();
         addAutor = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
+        viewEditora = new javax.swing.JMenuItem();
         addEdit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -175,6 +177,15 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
         menuAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/author.png"))); // NOI18N
         menuAutor.setText("Autor");
 
+        viewAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/author.png"))); // NOI18N
+        viewAutor.setText("Ver autor");
+        viewAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAutorActionPerformed(evt);
+            }
+        });
+        menuAutor.add(viewAutor);
+
         addAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/add.png"))); // NOI18N
         addAutor.setText("Adicionar Autor");
         addAutor.addActionListener(new java.awt.event.ActionListener() {
@@ -188,6 +199,15 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
 
         menuEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/publisher.png"))); // NOI18N
         menuEdit.setText("Editora");
+
+        viewEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/publisher.png"))); // NOI18N
+        viewEditora.setText("Ver Editora");
+        viewEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewEditoraActionPerformed(evt);
+            }
+        });
+        menuEdit.add(viewEditora);
 
         addEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/add.png"))); // NOI18N
         addEdit.setText("Adicionar Editora");
@@ -284,6 +304,14 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
        new AdicionarEditora(sistema).setVisible(true);
     }//GEN-LAST:event_addEditActionPerformed
 
+    private void viewAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAutorActionPerformed
+        new ExibirAutores(sistema).setVisible(true);
+    }//GEN-LAST:event_viewAutorActionPerformed
+
+    private void viewEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditoraActionPerformed
+        new ExibirEditoras(sistema).setVisible(true);
+    }//GEN-LAST:event_viewEditoraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,5 +368,7 @@ public class TelaOpcoesFuncionario extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMosLiv;
     private javax.swing.JMenuBar menuTelaOpcoesFuncionario;
     private javax.swing.JLabel simboloF;
+    private javax.swing.JMenuItem viewAutor;
+    private javax.swing.JMenuItem viewEditora;
     // End of variables declaration//GEN-END:variables
 }

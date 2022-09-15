@@ -2,7 +2,10 @@ package biblioteca.telas;
 import biblioteca.classes.Cliente;
 import biblioteca.classes.Estante;
 import biblioteca.classes.GerenciarBiblioteca;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -62,6 +65,9 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
         jMenuItemAcervo = new javax.swing.JMenuItem();
         jMenuItemEstantes = new javax.swing.JMenuItem();
         jMenuItemHistorico = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        viewEditora = new javax.swing.JMenuItem();
+        viewAutor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
@@ -147,6 +153,36 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/employee.png"))); // NOI18N
+        jMenu2.setText("Cliente");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        viewEditora.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        viewEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/livro16x16.png"))); // NOI18N
+        viewEditora.setText("Ver Editoras");
+        viewEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewEditoraActionPerformed(evt);
+            }
+        });
+        jMenu2.add(viewEditora);
+
+        viewAutor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        viewAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/bookshelf16x16.png"))); // NOI18N
+        viewAutor.setText("Ver Autores");
+        viewAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAutorActionPerformed(evt);
+            }
+        });
+        jMenu2.add(viewAutor);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,8 +237,24 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         myUser.updateNivel();
         carregarTabela();
-        sistema.saveData();
+        try {
+            sistema.saveData();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(TelaOpcoesCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+    private void viewEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditoraActionPerformed
+        new ExibirEditoras(sistema).setVisible(true);
+    }//GEN-LAST:event_viewEditoraActionPerformed
+
+    private void viewAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAutorActionPerformed
+        new ExibirAutores(sistema).setVisible(true);
+    }//GEN-LAST:event_viewAutorActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,6 +295,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAcervo;
     private javax.swing.JMenuItem jMenuItemEstantes;
@@ -250,5 +303,7 @@ public class TelaOpcoesCliente extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemMeusLivros;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem viewAutor;
+    private javax.swing.JMenuItem viewEditora;
     // End of variables declaration//GEN-END:variables
 }

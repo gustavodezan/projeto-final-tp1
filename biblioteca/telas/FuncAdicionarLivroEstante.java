@@ -11,7 +11,11 @@ import biblioteca.classes.Estante;
 import biblioteca.classes.Funcionario;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
+import java.net.URISyntaxException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -68,7 +72,7 @@ public class FuncAdicionarLivroEstante extends javax.swing.JFrame {
             
         
         for (int i=0;i < editoras.size();i++){
-            Object linha[] = {editoras.get(i).getNome(),editoras.get(i).getPaisOrigem(),editoras.get(i).getDataCriacao(),editoras.get(i).getQtdLivrosPublicados()};
+            Object linha[] = {editoras.get(i).getNome(),editoras.get(i).getPaisOrigem(),editoras.get(i).getDataCriacao().toZonedDateTime().format(DateTimeFormatter.ofPattern("d MMM uuuu")),editoras.get(i).getQtdLivrosPublicados()};
             modelo.addRow(linha);
         }
         tblEdit.setModel(modelo);
@@ -291,7 +295,13 @@ public class FuncAdicionarLivroEstante extends javax.swing.JFrame {
             autores.get(ind).escreveuLivro(livro);
             editoras.get(ind2).publicouLivro(livro);
             funcionarioA.adicionarLivro(livro, estante);
+            livro.setId(sistema.incrementIDLivro());
             sistema.addLivro(livro);
+            try {
+                sistema.saveData();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(FuncAdicionarLivroEstante.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog (null,"Livro foi adicionado a estante");
             func.carregarTabela();
             TfNomeLivro.setText("");

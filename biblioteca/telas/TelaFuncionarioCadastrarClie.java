@@ -6,9 +6,12 @@ package biblioteca.telas;
 import biblioteca.classes.Cliente;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
     ArrayList<Cliente> clientes;
-
+    GerenciarBiblioteca sistema;
     
     public TelaFuncionarioCadastrarClie(){
         initComponents();
@@ -27,6 +30,7 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
     public TelaFuncionarioCadastrarClie(GerenciarBiblioteca sistema) {
         initComponents();
         this.clientes=sistema.getClientes();
+        this.sistema = sistema;
     }
 
     /**
@@ -158,7 +162,13 @@ public class TelaFuncionarioCadastrarClie extends javax.swing.JFrame {
         if (!nome.equals("") && !senha.equals("") && !username.equals("")){
             ArrayList<Livro> historicoLivros = new ArrayList<>();
             Cliente cliente = new Cliente(nome,senha,username,historicoLivros,cal,1);
+            cliente.setId(sistema.incrementIDCliente());
             clientes.add(cliente);
+            try {
+                sistema.saveData();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(TelaFuncionarioCadastrarClie.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog (null,"Cliente cadastrado com sucesso.");
             jTfNome.setText("");
             pfSenha.setText("");

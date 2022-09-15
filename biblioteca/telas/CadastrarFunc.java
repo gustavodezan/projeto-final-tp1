@@ -6,6 +6,9 @@ package biblioteca.telas;
 
 import biblioteca.classes.Funcionario;
 import biblioteca.classes.GerenciarBiblioteca;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -145,8 +148,13 @@ public class CadastrarFunc extends javax.swing.JFrame {
         String setor=tfSetor.getText();
         
         if (!nome.equals("") && !username.equals("") && !senha.equals("") && !cargo.equals("") && !setor.equals("")){
-            Funcionario Funcionario = new Funcionario(nome,senha,username,cargo,setor);
-            sistema.addFuncionario(Funcionario);
+            Funcionario funcionario = new Funcionario(nome,senha,username,cargo,setor);
+            sistema.addFuncionario(funcionario);
+            try {
+                sistema.saveData();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(CadastrarFunc.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog (null,"Funcionario cadastrado com sucesso.");
             tfNome.setText("");
             tfUsername.setText("");

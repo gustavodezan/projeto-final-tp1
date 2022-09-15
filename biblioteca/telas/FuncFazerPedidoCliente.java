@@ -9,7 +9,10 @@ import biblioteca.classes.Estante;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
 import biblioteca.classes.Pedido;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -233,7 +236,13 @@ public class FuncFazerPedidoCliente extends javax.swing.JFrame {
 //            
 //            }
             JOptionPane.showMessageDialog (null,"Pedido realizado com sucesso");
+            pedido.setId(sistema.incrementIDPedido());
             sistema.addPedido(pedido);
+            try {
+                sistema.saveData();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(FuncFazerPedidoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
             livrosped.clear();
             this.carregarTabela2();
         }

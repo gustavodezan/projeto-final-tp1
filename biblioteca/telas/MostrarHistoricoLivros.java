@@ -8,6 +8,7 @@ import biblioteca.classes.Cliente;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,7 +41,7 @@ public class MostrarHistoricoLivros extends javax.swing.JFrame {
             
         for (int i=0;i < meuHistorico.size();i++){
             Object linha[] = {meuHistorico.get(i).getNome(),meuHistorico.get(i).getDataDePublicacao()
-                    ,meuHistorico.get(i).getGenero(),meuHistorico.get(i).getQtDePaginas(),meuHistorico.get(i).isEmprestado()};
+                    ,meuHistorico.get(i).getGenero(),meuHistorico.get(i).getQtDePaginas(),(meuHistorico.get(i).isEmprestado()) ? "Não disponivel":"Disponivel"};
             modelo.addRow(linha);
         }
         jTable1.setModel(modelo);
@@ -56,6 +57,7 @@ public class MostrarHistoricoLivros extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButtonOrdenar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/library.png")).getImage());
@@ -73,19 +75,38 @@ public class MostrarHistoricoLivros extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(jButtonOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonOrdenar)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        meuHistorico.sort(Comparator.comparing(Livro::getGenero));
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
   
     /**
      * @param args the command line arguments
@@ -126,6 +147,7 @@ public class MostrarHistoricoLivros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonOrdenar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

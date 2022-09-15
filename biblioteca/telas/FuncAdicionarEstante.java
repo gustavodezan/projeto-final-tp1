@@ -6,7 +6,10 @@ package biblioteca.telas;
 
 import biblioteca.classes.Estante;
 import biblioteca.classes.GerenciarBiblioteca;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class FuncAdicionarEstante extends javax.swing.JFrame {
     ArrayList<Estante> estantes = new ArrayList<>();
-   
+    GerenciarBiblioteca sistema;
     
     public FuncAdicionarEstante() {
         initComponents();
@@ -26,6 +29,7 @@ public class FuncAdicionarEstante extends javax.swing.JFrame {
     public FuncAdicionarEstante(GerenciarBiblioteca sistema) {
         initComponents();
         this.estantes=sistema.getEstantes();
+        this.sistema = sistema;
     }
 
     /**
@@ -152,11 +156,31 @@ public class FuncAdicionarEstante extends javax.swing.JFrame {
         
         if (!id.equals("") && !local.equals("") && !genero.equals("") ){
             Estante estante1 = new Estante(id,local,genero);
+            boolean cancelar = false;
+            for (Estante e : sistema.getEstantes()) {
+                if (e.getIdentificacao().equals(estante1.getIdentificacao())) {
+                    cancelar = true;
+                    break;
+                }
+            }
+            if (!cancelar){
             estantes.add(estante1);
+            try {
+                sistema.saveData();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(FuncAdicionarEstante.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog (null,"Estante criada com sucesso");
                 tfAdcId.setText("");
                 tfAdcLoc.setText("");
                 tfAdcGen.setText("");
+            }
+            else {
+                JOptionPane.showMessageDialog (null,"Já existe uma estante com esse identificador!");
+                tfAdcId.setText("");
+                tfAdcLoc.setText("");
+                tfAdcGen.setText("");
+            }
 
         }else{
             JOptionPane.showMessageDialog (null,"valor(es) invalido(s)");

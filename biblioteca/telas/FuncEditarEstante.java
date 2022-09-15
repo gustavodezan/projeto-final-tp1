@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FuncEditarEstante extends javax.swing.JFrame {
     ArrayList<Estante> estantes = new ArrayList<>();
-  
+    GerenciarBiblioteca sistema;
     public FuncEditarEstante() {
         initComponents();
         carregarTabela();
@@ -27,6 +27,7 @@ public class FuncEditarEstante extends javax.swing.JFrame {
     public FuncEditarEstante(GerenciarBiblioteca sistema) {
         initComponents();
         this.estantes=sistema.getEstantes();
+        this.sistema = sistema;
         carregarTabela();
         
     }

@@ -7,8 +7,11 @@ package biblioteca.telas;
 import biblioteca.classes.Cliente;
 import biblioteca.classes.GerenciarBiblioteca;
 import biblioteca.classes.Livro;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -18,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class CadastroView extends javax.swing.JFrame {
     ArrayList<Cliente> clientes;
+    GerenciarBiblioteca sistema;
             
     public CadastroView() {
         initComponents();
@@ -25,6 +29,7 @@ public class CadastroView extends javax.swing.JFrame {
     public CadastroView(GerenciarBiblioteca sistema) {
         initComponents();
         this.clientes=sistema.getClientes();
+        this.sistema = sistema;
     }
 
     /**
@@ -128,6 +133,11 @@ public class CadastroView extends javax.swing.JFrame {
             ArrayList<Livro> historicoLivros = new ArrayList<>();
             Cliente cliente = new Cliente(nome,senha,usuario,historicoLivros,cal,1);
             clientes.add(cliente);
+            try {
+                sistema.saveData();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(CadastroView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog (null,"Cadastro realizado com sucesso.");
             this.dispose();
         }

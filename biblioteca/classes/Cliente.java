@@ -4,8 +4,9 @@
  */
 package biblioteca.classes;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.ArrayList;
+//import java.util.Comparator;
 import java.util.GregorianCalendar;
 public class Cliente extends Usuario {
     private GregorianCalendar dataInscricao;
@@ -79,20 +80,7 @@ public class Cliente extends Usuario {
     public void setLivrosEmprestados(ArrayList<Livro> livrosEmprestados) {
         this.livrosEmprestados = livrosEmprestados;
     }
-    
-    //public boolean solicitarEmprestimo(String nomeLivro,String genero){};
-    
-    public boolean verificarLivro(String nomeLivro,ArrayList<ArrayList<Livro>> estantes){
-      for(ArrayList<Livro> estante: estantes){
-          for(Livro livro:estante){
-              if(livro.getNome().equals(nomeLivro)){
-                  return true;
-              }
-          }
-      }
-        return false;
-    }
-    
+     
     public void updateNivel(){
         nivelLeitor = (int) (historicoLivros.size() / 5);
     }
@@ -108,9 +96,5 @@ public class Cliente extends Usuario {
            livrosEmprestados.get(i).setEmprestado(false);
        }
        livrosEmprestados.clear();
-    }
-    
-    public ArrayList<Livro> listarLivros(){
-       return this.historicoLivros;
     }
 }

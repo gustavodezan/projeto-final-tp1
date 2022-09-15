@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileWriter;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -45,10 +46,11 @@ public class GerenciarBiblioteca {
         // Iniciar sistemas - Ler JSON
         // read json file and write to ArrayList
         ObjectMapper mapper = new ObjectMapper();
-        String filename = "C:/Users/gusta/OneDrive/Documents/NetBeansProjects/Projeto TP1/src/biblioteca/data/database.json";
+        //String filename = "C:/Users/gusta/OneDrive/Documents/NetBeansProjects/Projeto TP1/src/biblioteca/data/database.json";
+        var file = this.getClass().getResource("../data/database.json");
         // read file
         try {
-            Map<String, Object> map = mapper.readValue(new File(filename), Map.class);
+            Map<String, Object> map = mapper.readValue(this.getClass().getResource("../data/database.json"), Map.class);
             System.out.println(map);
             // get sistema
             Map<String, Object> sistema = (Map<String, Object>) map.get("sistema");
@@ -208,7 +210,7 @@ public class GerenciarBiblioteca {
         this.estantes.addAll(estantes);
     }
 
-    public void saveData() {
+    public void saveData() throws URISyntaxException {
         // sistema
         Map<String, Object> sistema = new LinkedHashMap<>();
         sistema.put("id_cliente", this.id_cliente);
@@ -334,10 +336,14 @@ public class GerenciarBiblioteca {
 
         try {
             // save file with json
-            FileWriter file = new FileWriter("C:/Users/gusta/OneDrive/Documents/NetBeansProjects/Projeto TP1/src/biblioteca/data/database.json");
             ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(file, data);
-            file.close();
+            //Map<String, Object> map = mapper.readValue(this.getClass().getResource("../data/database.json"), Map.class);
+            var file = this.getClass().getResource("../data/database.json");
+            mapper.writeValue(new File(file.toURI()), data);
+            
+            //mapper.writeValue(file, data);
+            //mapper.writeValueAsString(file);
+            //file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -423,7 +429,17 @@ public class GerenciarBiblioteca {
         id_pedido += 1;
         return id_pedido;
     }
+    
+    public int incrementIDCliente() {
+        id_cliente += 1;
+        return id_cliente;
+    }
 
+    public int incrementIDLivro() {
+        id_livro += 1;
+        return id_livro;
+    }
+    
     public Cliente getCurrentCliente() {
         return currentCliente;
     }
@@ -454,6 +470,10 @@ public class GerenciarBiblioteca {
     
     public void addAutores(Autor autor) {
         this.autores.add(autor);
+    }
+    
+    public void addEstante(Estante estante) {
+        this.estantes.add(estante);
     }
     
     public void addEditora(Editora editora){
