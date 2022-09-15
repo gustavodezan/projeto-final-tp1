@@ -9,6 +9,10 @@ public class Funcionario extends Usuario{
         this.cargo = cargo;
         this.setorResponsavel = setorResponsavel;
     }
+    
+    public Funcionario(String nome, String senha, String username) {
+        super(nome,username,senha);
+    }
 
     public String getCargo() {
         return cargo;

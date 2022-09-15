@@ -33,6 +33,7 @@ public class GerenciarBiblioteca {
     private ArrayList<Autor> autores;
     private ArrayList<Editora> editoras;
     private ArrayList<Livro> livros;
+    public Funcionario adm = new Funcionario("adm", "adm", "adm");
     private Cliente currentCliente;
     
     public GerenciarBiblioteca() {
@@ -46,11 +47,10 @@ public class GerenciarBiblioteca {
         // Iniciar sistemas - Ler JSON
         // read json file and write to ArrayList
         ObjectMapper mapper = new ObjectMapper();
-        //String filename = "C:/Users/gusta/OneDrive/Documents/NetBeansProjects/Projeto TP1/src/biblioteca/data/database.json";
-        var file = this.getClass().getResource("../data/database.json");
+        String filename = "C:/Users/gusta/OneDrive/Documents/NetBeansProjects/MergeProjetoTP1/src/biblioteca/data/database.json";
         // read file
         try {
-            Map<String, Object> map = mapper.readValue(this.getClass().getResource("../data/database.json"), Map.class);
+            Map<String, Object> map = mapper.readValue(new File(filename), Map.class);
             // get sistema
             Map<String, Object> sistema = (Map<String, Object>) map.get("sistema");
             this.id_cliente = (int) sistema.get("id_cliente");
@@ -333,14 +333,10 @@ public class GerenciarBiblioteca {
 
         try {
             // save file with json
+            FileWriter file = new FileWriter("C:/Users/gusta/OneDrive/Documents/NetBeansProjects/MergeProjetoTP1/src/biblioteca/data/database.json");
             ObjectMapper mapper = new ObjectMapper();
-            //Map<String, Object> map = mapper.readValue(this.getClass().getResource("../data/database.json"), Map.class);
-            var file = this.getClass().getResource("../data/database.json");
-            mapper.writeValue(new File(file.toURI()), data);
-            
-            //mapper.writeValue(file, data);
-            //mapper.writeValueAsString(file);
-            //file.close();
+            mapper.writeValue(file, data);
+            file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

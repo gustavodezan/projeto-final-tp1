@@ -125,7 +125,11 @@ public class LoginView extends javax.swing.JFrame {
         String usuario = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
         boolean existe = false;
-        
+        if (sistema.adm.getNomeUsuario().equals(usuario) && sistema.adm.verificarLogin(senha))
+        {
+            new TelaOpcoesFuncionario(sistema,sistema.adm).setVisible(true);
+        }
+        else{
         for (int i=0;i < funcionarios.size();i++){
             if (funcionarios.get(i).getNomeUsuario().equals(usuario)){
                 existe=true;
@@ -157,6 +161,7 @@ public class LoginView extends javax.swing.JFrame {
             if (existe==false){
                 JOptionPane.showMessageDialog(null,"Usuario não existe.");
             }
+        }
         }
         
         
