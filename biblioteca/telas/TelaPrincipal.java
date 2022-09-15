@@ -28,65 +28,69 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     public TelaPrincipal() {
         initComponents();
-        estantes = new ArrayList<>();
-        Estante estanteA = new Estante("A", "Ala 1", "Aventura");
-        estantes.add(estanteA);
-        Estante estanteB = new Estante("B", "Ala 2", "Sci-Fi");
-        estantes.add(estanteB);
-        Estante estanteC = new Estante("C", "Ala 3", "Drama");
-        estantes.add(estanteC);
+        sistema = new GerenciarBiblioteca();
+        estantes = sistema.getEstantes();
+        clientes = sistema.getClientes();
+        funcionarios = sistema.getFuncionarios();
+        // estantes = new ArrayList<>();
+        // Estante estanteA = new Estante("A", "Ala 1", "Aventura");
+        // estantes.add(estanteA);
+        // Estante estanteB = new Estante("B", "Ala 2", "Sci-Fi");
+        // estantes.add(estanteB);
+        // Estante estanteC = new Estante("C", "Ala 3", "Drama");
+        // estantes.add(estanteC);
         
-        clientes = new ArrayList<>();
-        Cliente cliente1 = new Cliente("root", "root", "root");
-        clientes.add(cliente1);
+        // clientes = new ArrayList<>();
+        // Cliente cliente1 = new Cliente("root", "root", "root");
+        // clientes.add(cliente1);
         
-        funcionarios =new ArrayList<>();
-        Funcionario funcionarioA=new Funcionario("João Gustavo","12345","admin1","administrador do Sistema","TI");
-        Funcionario funcionarioB = new Funcionario("admin","admin","admin","Admin","TI");
-        funcionarios.add(funcionarioA);
-        funcionarios.add(funcionarioB);
+        // funcionarios =new ArrayList<>();
+        // Funcionario funcionarioA=new Funcionario("João Gustavo","12345","admin1","administrador do Sistema","TI");
+        // Funcionario funcionarioB = new Funcionario("admin","admin","admin","Admin","TI");
+        // funcionarios.add(funcionarioA);
+        // funcionarios.add(funcionarioB);
         
-        Editora editoraA = new Editora("Harper Collins Brasil", "Brasil", new GregorianCalendar(2015,1,1));
-        Editora editoraB = new Editora("Aleph", "Brasil", new GregorianCalendar(1986,1,1));
-        Editora editoraC = new Editora("Zahar", "Rio de Janeiro, Brasil", new GregorianCalendar(1957,1,1));
-        //{"id": 3, "nome":"O Chamado de Cthulhu", "genero":"Drama", "editora":2, "autor":3, "ano":1926, "edicao":1, "paginas":192, "isbn":"978-85-359-0277-1", "preco": 15.00, "quantidade": 1}
+        // Editora editoraA = new Editora("Harper Collins Brasil", "Brasil", new GregorianCalendar(2015,1,1));
+        // Editora editoraB = new Editora("Aleph", "Brasil", new GregorianCalendar(1986,1,1));
+        // Editora editoraC = new Editora("Zahar", "Rio de Janeiro, Brasil", new GregorianCalendar(1957,1,1));
+        // //{"id": 3, "nome":"O Chamado de Cthulhu", "genero":"Drama", "editora":2, "autor":3, "ano":1926, "edicao":1, "paginas":192, "isbn":"978-85-359-0277-1", "preco": 15.00, "quantidade": 1}
         
-        Autor tolkien = new Autor("J. R. R. Tolkien", "Inglaterra", "03/01/1892", 0);
-        Livro hobbit = new Livro("O Hobbit", "21/09/1937", "Aventura", 299, tolkien, estanteA);
-        hobbit.setEditora(editoraA);
-        editoraA.addLivro(hobbit);
-        tolkien.escreveuLivro(hobbit);
-        estanteA.adicionarLivro(hobbit);
+        // Autor tolkien = new Autor("J. R. R. Tolkien", "Inglaterra", "03/01/1892", 0);
+        // Livro hobbit = new Livro("O Hobbit", "21/09/1937", "Aventura", 299, tolkien, estanteA);
+        // hobbit.setEditora(editoraA);
+        // editoraA.addLivro(hobbit);
+        // tolkien.escreveuLivro(hobbit);
+        // estanteA.adicionarLivro(hobbit);
         
-        Autor gibson = new Autor("Willian Gibson", "Estados Unidos", "17/02/1948", 0);
-        Livro neuromancer = new Livro("Neuromancer", "01/06/1984", "Sci-Fi", 319, gibson, estanteB);
-        neuromancer.setEditora(editoraB);
-        editoraB.addLivro(neuromancer);
-        gibson.escreveuLivro(neuromancer);
-        estanteB.adicionarLivro(neuromancer);
+        // Autor gibson = new Autor("Willian Gibson", "Estados Unidos", "17/02/1948", 0);
+        // Livro neuromancer = new Livro("Neuromancer", "01/06/1984", "Sci-Fi", 319, gibson, estanteB);
+        // neuromancer.setEditora(editoraB);
+        // editoraB.addLivro(neuromancer);
+        // gibson.escreveuLivro(neuromancer);
+        // estanteB.adicionarLivro(neuromancer);
         
-        Autor dumas = new Autor("Alexandre Dumas", "França", "24/07/1802", 0);
-        Livro conde = new Livro("O Conde de Monte Cristo - Volume 1", "1846", "Drama", 719, dumas, estanteC);
-        conde.setEditora(editoraC);
-        editoraC.addLivro(conde);
-        dumas.escreveuLivro(conde);
-        estanteC.adicionarLivro(conde);
+        // Autor dumas = new Autor("Alexandre Dumas", "França", "24/07/1802", 0);
+        // Livro conde = new Livro("O Conde de Monte Cristo - Volume 1", "1846", "Drama", 719, dumas, estanteC);
+        // conde.setEditora(editoraC);
+        // editoraC.addLivro(conde);
+        // dumas.escreveuLivro(conde);
+        // estanteC.adicionarLivro(conde);
         
-        Autor doyle = new Autor("Arthur Conan Doyle", "Inglaterra", "22/05/1859", 0);
-        Livro holmes = new Livro("Um Estudo em Vermelho", "1887", "Investigação", 190, doyle, estanteC);
-        holmes.setEditora(editoraC);
-        editoraC.addLivro(holmes);
-        doyle.escreveuLivro(holmes);
-        estanteC.adicionarLivro(holmes);
+        // Autor doyle = new Autor("Arthur Conan Doyle", "Inglaterra", "22/05/1859", 0);
+        // Livro holmes = new Livro("Um Estudo em Vermelho", "1887", "Investigação", 190, doyle, estanteC);
+        // holmes.setEditora(editoraC);
+        // editoraC.addLivro(holmes);
+        // doyle.escreveuLivro(holmes);
+        // estanteC.adicionarLivro(holmes);
         
-        sistema = new GerenciarBiblioteca(clientes,funcionarios,estantes);
+        // sistema = new GerenciarBiblioteca(clientes,funcionarios,estantes);
         
-        sistema.addAutores(tolkien);
-        sistema.addAutores(gibson);
-        sistema.addAutores(dumas);
-        sistema.addAutores(doyle);
+        // sistema.addAutores(tolkien);
+        // sistema.addAutores(gibson);
+        // sistema.addAutores(dumas);
+        // sistema.addAutores(doyle);
         
-        sistema.setId_pedido(3);
+        // sistema.setId_pedido(3);
     }
 
     /**

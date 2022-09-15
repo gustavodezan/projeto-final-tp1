@@ -80,5 +80,15 @@ public class Editora {
      public void publicouLivro(Livro livro){
         livros.add(livro);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+     
+     
     
 }

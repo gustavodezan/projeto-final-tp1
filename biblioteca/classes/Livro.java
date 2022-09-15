@@ -118,6 +118,14 @@ public class Livro{
     public void setEstante(Estante estante) {
         this.estante = estante;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String mostrarInformacoes(){
         return "Nome: "+this.nome+"\nData de Publicação: "+this.dataDePublicacao

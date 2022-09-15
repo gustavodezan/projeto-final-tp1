@@ -1,9 +1,11 @@
  {
     "sistema":{
-        "id_cliente": 0,
-        "id_funcionario": 0,
-        "id_estante": 0,
-        "id_pedido": 1
+        "id_cliente": 2,
+        "id_funcionario": 1,
+        "id_estante": 3,
+        "id_pedido": 2,
+        "id_livro": 4,
+        "id_editora": 3
     },
     "funcionarios": [
         {"nome":"admin", "usuario":"admin", "senha":"admin", "funcao":"admin","setor":"admin"}
@@ -14,9 +16,9 @@
         {"id":"C", "ala":"Ala 3", "generos":"Drama"}
     ],
     "editoras":[
-        {"id": 0, "nome":"Harper Collins Brasil", "pais":"Brasil", "fundacao":"2015/1/1"},
-        {"id": 1, "nome":"Aleph", "pais":"Brasil", "fundacao":"1986/1/1"},
-        {"id": 2, "nome":"Zahar", "pais":"Rio de Janeiro, Brasil", "fundacao":"1957/1/1"}
+        {"id": 0, "nome":"Harper Collins Brasil", "pais":"Brasil", "fundacao":"2015/01/01"},
+        {"id": 1, "nome":"Aleph", "pais":"Brasil", "fundacao":"1986/01/01"},
+        {"id": 2, "nome":"Zahar", "pais":"Rio de Janeiro, Brasil", "fundacao":"1957/01/01"}
     ],
     "autores":[
         {"id": 0,"nome":"J. R. R. Tolkien", "pais":"Inglaterra","nascimento":"03/01/1892", "livros":0},
@@ -40,6 +42,6 @@
             {"livro":2},
             {"livro":3}],
         "emprestados":[]},
-        {"nome": "123", "usuario": "123", "senha": "123","data_registro": "2022/09/14","historico": [],"emprestados":[]}
+        {"nome": "123", "usuario": "123", "senha": "123","nivel":0,"data_registro": "2022/09/14","historico": [],"emprestados":[]}
     ]
 }
