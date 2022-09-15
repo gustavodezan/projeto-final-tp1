@@ -20,16 +20,23 @@ import java.util.Map;
 
 public class GerenciarBiblioteca {
     int id_cliente = 0, id_funcionario = 0, id_estante = 0, id_pedido = 0, id_livro = 0, id_editora = 0;
-    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-    private ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-    private ArrayList<Estante> estantes = new ArrayList<Estante>();
-    private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-    private ArrayList<Autor> autores = new ArrayList<>();
-    private ArrayList<Editora> editoras = new ArrayList<>();
-    private ArrayList<Livro> livros = new ArrayList<>();
+    private ArrayList<Cliente> clientes;
+    private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Estante> estantes;
+    private ArrayList<Pedido> pedidos;
+    private ArrayList<Autor> autores;
+    private ArrayList<Editora> editoras;
+    private ArrayList<Livro> livros;
     private Cliente currentCliente;
     
     public GerenciarBiblioteca() {
+        this.clientes = new ArrayList<Cliente>();
+        this.funcionarios = new ArrayList<Funcionario>();
+        this.estantes = new ArrayList<Estante>();
+        this.pedidos = new ArrayList<Pedido>();
+        this.autores = new ArrayList<Autor>();
+        this.editoras = new ArrayList<Editora>();
+        this.livros = new ArrayList<Livro>();
         // Iniciar sistemas - Ler JSON
         // read json file and write to ArrayList
         ObjectMapper mapper = new ObjectMapper();
@@ -60,15 +67,17 @@ public class GerenciarBiblioteca {
             }
 
             // get estantes (id, ala, generos)
-            ArrayList<Map<String, Object>> estantes = (ArrayList<Map<String, Object>>) map.get("estantes");
-            for (Map<String, Object> estante : estantes) {
-                Estante e = new Estante(
-                    (String) estante.get("id"),
-                    (String) estante.get("ala"),
-                    (String) estante.get("generos"));
-                this.estantes.add(e);
+            ArrayList<Map<String, Object>> estante_list = (ArrayList<Map<String, Object>>) map.get("estantes");
+            Estante est;
+            for (int k = 0; k < estante_list.size(); k++) {
+                est = new Estante();
+                est.setIdentificacao((String) estante_list.get(k).get("id"));
+                est.setLocalizacao((String) estante_list.get(k).get("ala"));
+                est.setGenero((String) estante_list.get(k).get("generos"));
+                this.estantes.add(est);
+                
             }
-
+            System.out.println(this.estantes.toString());
             // get editoras (id, nome, pais , fundacao)
             ArrayList<Map<String, Object>> editoras = (ArrayList<Map<String, Object>>) map.get("editoras");
             for (Map<String, Object> editora : editoras) {
@@ -91,8 +100,8 @@ public class GerenciarBiblioteca {
                 Autor a = new Autor(
                     (int) autor.get("id"),
                     (String) autor.get("nome"),
-                    (String) autor.get("nacionalidade"),
-                    (String) autor.get("data_nascimento"),
+                    (String) autor.get("pais"),
+                    (String) autor.get("nascimento"),
                     (int) autor.get("livros"));
                 this.autores.add(a);
             }
@@ -117,7 +126,7 @@ public class GerenciarBiblioteca {
                 }
                 Estante estante = new Estante();
                 for (Estante e : this.estantes) {
-                    if (e.getIdentificacao() == (String) livro.get("estante")) {
+                    if (e.getIdentificacao().equals(livro.get("estante"))) {
                         System.out.println(e.getIdentificacao());
                         estante = e;
                         break;
@@ -134,7 +143,6 @@ public class GerenciarBiblioteca {
                 estante,
                 editora);
                 this.livros.add(l);
-
                 editora.addLivro(l);
                 autor.escreveuLivro(l);
                 estante.adicionarLivro(l);
@@ -195,6 +203,10 @@ public class GerenciarBiblioteca {
     }
 
     public ArrayList<Cliente> getClientes() {
+//        System.out.println(this.clientes);
+//        System.out.println(this.funcionarios);
+//        System.out.println(this.livros);
+        
         return clientes;
     }
 
@@ -211,7 +223,7 @@ public class GerenciarBiblioteca {
     }
 
     public ArrayList<Estante> getEstantes() {
-        return estantes;
+        return this.estantes;
     }
 
     public void setEstantes(ArrayList<Estante> estantes) {

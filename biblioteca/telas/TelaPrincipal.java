@@ -29,9 +29,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         sistema = new GerenciarBiblioteca();
-        estantes = sistema.getEstantes();
-        clientes = sistema.getClientes();
-        funcionarios = sistema.getFuncionarios();
+        estantes =(sistema.getEstantes());
+        clientes = (sistema.getClientes());
+        funcionarios = (sistema.getFuncionarios());
         // estantes = new ArrayList<>();
         // Estante estanteA = new Estante("A", "Ala 1", "Aventura");
         // estantes.add(estanteA);

@@ -43,10 +43,13 @@ public class MostrarAcervo extends javax.swing.JFrame {
         };
         
         //Object linha[];
+        System.out.println(1);
         for (int i=0;i < estantes.size();i++){
             ArrayList<Livro> estante = estantes.get(i).getEstante();
-            for(int j=0;j < estante.size();j++)
+            for(int j=0;j < estante.size();j++) {
                 todosLivros.add(estante.get(j));
+                System.out.println(estante.get(j).getNome());
+            }
         }
         for (int i=0;i < todosLivros.size();i++){
             Livro livro = todosLivros.get(i);
